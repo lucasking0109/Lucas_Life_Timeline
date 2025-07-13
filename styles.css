@@ -535,12 +535,13 @@ header h1 i {
     background: white;
     padding: 0;
     border-radius: 15px;
-    width: 90%;
-    max-width: 500px;
+    width: 95%;
+    max-width: 800px;
     max-height: 90vh;
     overflow-y: auto;
     box-shadow: 0 20px 60px rgba(0,0,0,0.3);
     animation: modalSlideIn 0.3s ease;
+    margin: 0 auto;
 }
 
 @keyframes modalSlideIn {
@@ -585,11 +586,11 @@ header h1 i {
 
 /* 表單樣式 */
 #eventForm {
-    padding: 2rem;
+    padding: 2.5rem;
 }
 
 .form-group {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.8rem;
 }
 
 .form-group label {
@@ -608,6 +609,11 @@ header h1 i {
     border-radius: 8px;
     font-size: 1rem;
     transition: border-color 0.3s ease;
+}
+
+.form-group textarea {
+    min-height: 120px;
+    resize: vertical;
 }
 
 .form-group input:focus,
