@@ -231,7 +231,11 @@ class TimelineApp {
             },
             {
                 id: 1752382630409,
-                year: 2022,
+                startYear: 2022,
+                startMonth: 2,
+                endYear: 2022,
+                endMonth: 6,
+                year: 2022, // 用於排序
                 month: 2,
                 title: "Hanze UAS",
                 description: "Exchange student with scholarship in Hanze University of Applied Sciences | Hanze UAS, study in Brand, Design& Psychology",
@@ -241,7 +245,11 @@ class TimelineApp {
             },
             {
                 id: 1752382210876,
-                year: 2021,
+                startYear: 2021,
+                startMonth: 7,
+                endYear: 2023,
+                endMonth: 12,
+                year: 2021, // 用於排序
                 month: 7,
                 title: "使用 MT5 建構交易策略",
                 description: "1. 蒐集、匯入資料\n2. 交易策略概念發想，使用 MQL5 語言撰寫策略，主要以價格變動當作參考對象，使用技術指標，包括跨週期策略、趨勢跟蹤策略、均值回歸超跌反彈等策略。\n3. 回測挑選適合策略的標的，針對不同特型的商品做微調以及增加濾網\n4. 透過 in-of-sample, out-of-sample 資料或是 rolling window 方式去最佳化參數，其中以不同目標作為最佳化對象，例如 Sharpe ratio、Profits/Max Drawdown 等\n5. 比較策略之間進出場點位分析策略相關性，最終使用有 7 個策略，總共使用於 130 多種不同商品、週期的 CFD 商品，並且架設 VPS 虛擬主機 24 小時運行策略\n6. 建構投資組合，每三個月調整策略權重",
@@ -406,28 +414,154 @@ class TimelineApp {
             filteredEvents = filteredEvents.filter(event => event.category === selectedCategory);
         }
         
-        // 按年份和月份排序（新到舊）
-        filteredEvents.sort((a, b) => {
-            if (a.year !== b.year) return b.year - a.year;
-            return b.month - a.month;
-        });
-        
         if (filteredEvents.length === 0) {
-            this.timelineContainer.innerHTML = '<div class="no-events">還沒有任何事件</div>';
+            this.timelineContainer.innerHTML = '<div class="empty-state show"><div class="empty-icon">📅</div><h3>還沒有任何事件</h3><p>點擊上方的「新增事件」按鈕開始記錄你的人生時間軸</p></div>';
             return;
         }
         
-        this.timelineContainer.innerHTML = filteredEvents.map(event => this.createEventElement(event)).join('');
+        this.renderGanttChart(filteredEvents);
     }
-
-    createEventElement(event) {
+    
+    renderGanttChart(events) {
+        // 計算時間範圍
+        const timeRange = this.calculateTimeRange(events);
+        
+        // 創建甘特圖HTML
+        let html = '<div class="timeline">';
+        
+        // 創建年份標題行
+        html += '<div class="timeline-years">';
+        html += '<div class="year-marker">事件</div>';
+        
+        for (let year = timeRange.startYear; year <= timeRange.endYear; year++) {
+            const yearStartMonth = year === timeRange.startYear ? timeRange.startMonth : 1;
+            const yearEndMonth = year === timeRange.endYear ? timeRange.endMonth : 12;
+            const yearWidth = (yearEndMonth - yearStartMonth + 1) * 80; // 每個月80px
+            
+            html += `<div class="year-marker" style="width: ${yearWidth}px; border-right: 2px solid #ccc;">${year}</div>`;
+        }
+        html += '</div>';
+        
+        // 創建事件內容區域
+        html += '<div class="timeline-content-area">';
+        
+        // 按時間排序事件
+        events.sort((a, b) => {
+            const aStart = (a.startYear || a.year) * 12 + (a.startMonth || a.month);
+            const bStart = (b.startYear || b.year) * 12 + (b.startMonth || b.month);
+            return aStart - bStart;
+        });
+        
+        // 計算事件的垂直位置（避免重疊）
+        const eventPositions = this.calculateEventPositions(events, timeRange);
+        
+        // 渲染每個事件
+        events.forEach((event, index) => {
+            const eventHtml = this.createGanttEventElement(event, timeRange, eventPositions[index]);
+            html += eventHtml;
+        });
+        
+        html += '</div></div>';
+        this.timelineContainer.innerHTML = html;
+    }
+    
+    calculateTimeRange(events) {
+        let minYear = Infinity;
+        let maxYear = -Infinity;
+        let minMonth = 12;
+        let maxMonth = 1;
+        
+        events.forEach(event => {
+            const startYear = event.startYear || event.year;
+            const startMonth = event.startMonth || event.month;
+            const endYear = event.endYear || event.year;
+            const endMonth = event.endMonth || event.month;
+            
+            if (startYear < minYear || (startYear === minYear && startMonth < minMonth)) {
+                minYear = startYear;
+                minMonth = startMonth;
+            }
+            
+            if (endYear > maxYear || (endYear === maxYear && endMonth > maxMonth)) {
+                maxYear = endYear;
+                maxMonth = endMonth;
+            }
+        });
+        
+        const totalMonths = (maxYear - minYear) * 12 + (maxMonth - minMonth) + 1;
+        
+        return {
+            startYear: minYear,
+            startMonth: minMonth,
+            endYear: maxYear,
+            endMonth: maxMonth,
+            totalMonths: totalMonths
+        };
+    }
+    
+    calculateEventPositions(events, timeRange) {
+        const positions = [];
+        const rows = [];
+        
+        events.forEach(event => {
+            const startYear = event.startYear || event.year;
+            const startMonth = event.startMonth || event.month;
+            const endYear = event.endYear || event.year;
+            const endMonth = event.endMonth || event.month;
+            
+            const startPos = (startYear - timeRange.startYear) * 12 + (startMonth - timeRange.startMonth);
+            const endPos = (endYear - timeRange.startYear) * 12 + (endMonth - timeRange.startMonth);
+            
+            // 找到可用的行
+            let rowIndex = 0;
+            while (rowIndex < rows.length) {
+                const row = rows[rowIndex];
+                let canPlace = true;
+                
+                for (let pos of row) {
+                    if (!(endPos < pos.start || startPos > pos.end)) {
+                        canPlace = false;
+                        break;
+                    }
+                }
+                
+                if (canPlace) {
+                    break;
+                }
+                rowIndex++;
+            }
+            
+            // 如果沒有可用的行，創建新行
+            if (rowIndex >= rows.length) {
+                rows.push([]);
+            }
+            
+            rows[rowIndex].push({ start: startPos, end: endPos });
+            positions.push(rowIndex);
+        });
+        
+        return positions;
+    }
+    
+    createGanttEventElement(event, timeRange, rowIndex) {
+        const startYear = event.startYear || event.year;
+        const startMonth = event.startMonth || event.month;
+        const endYear = event.endYear || event.year;
+        const endMonth = event.endMonth || event.month;
+        
+        // 計算位置和寬度
+        const startPos = (startYear - timeRange.startYear) * 12 + (startMonth - timeRange.startMonth);
+        const endPos = (endYear - timeRange.startYear) * 12 + (endMonth - timeRange.startMonth);
+        const width = (endPos - startPos + 1) * 80; // 每個月80px
+        const left = 80 + startPos * 80; // 80px是左側標籤寬度
+        const top = rowIndex * 80 + 20; // 每行80px高度
+        
         const monthNames = ['', '一月', '二月', '三月', '四月', '五月', '六月', 
                            '七月', '八月', '九月', '十月', '十一月', '十二月'];
         
-        // 支持時間段顯示
+        // 創建日期顯示
         let dateDisplay = '';
         if (event.startYear && event.endYear) {
-            // 時間段格式
             if (event.startYear === event.endYear) {
                 if (event.startMonth === event.endMonth) {
                     dateDisplay = `${event.startYear}年${monthNames[event.startMonth]}`;
@@ -438,29 +572,30 @@ class TimelineApp {
                 dateDisplay = `${event.startYear}年${monthNames[event.startMonth]} - ${event.endYear}年${monthNames[event.endMonth]}`;
             }
         } else {
-            // 向後兼容舊格式
             dateDisplay = `${event.year}年${monthNames[event.month]}`;
         }
         
         return `
-            <div class="timeline-item ${event.category}" data-id="${event.id}">
+            <div class="timeline-item ${event.category}" 
+                 data-id="${event.id}" 
+                 style="left: ${left}px; top: ${top}px; width: ${width}px;">
                 <div class="timeline-content">
-                    <div class="timeline-header">
-                        <div>
-                            <h3>${this.escapeHtml(event.title)}</h3>
-                            <div class="timeline-date">${dateDisplay}</div>
-                            <div class="timeline-category">${this.getCategoryName(event.category)}</div>
-                        </div>
-                        <div class="timeline-actions">
-                            <button onclick="app.openModal(app.getEventById(${event.id}))" class="edit-btn">編輯</button>
-                            <button onclick="app.deleteEvent(${event.id})" class="delete-btn">刪除</button>
-                        </div>
+                    <h3>${this.escapeHtml(event.title)}</h3>
+                    <div class="timeline-actions">
+                        <button onclick="app.openModal(app.getEventById(${event.id}))" class="edit-btn">編輯</button>
+                        <button onclick="app.deleteEvent(${event.id})" class="delete-btn">刪除</button>
                     </div>
-                    <p class="timeline-description">${this.escapeHtml(event.description).replace(/\n/g, '<br>')}</p>
+                </div>
+                <div class="timeline-tooltip">
+                    <strong>${this.escapeHtml(event.title)}</strong><br>
+                    ${dateDisplay}<br>
+                    ${this.getCategoryName(event.category)}
                 </div>
             </div>
         `;
     }
+
+
 
     getEventById(id) {
         return this.events.find(event => event.id === id);

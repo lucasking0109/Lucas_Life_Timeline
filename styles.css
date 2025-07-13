@@ -153,111 +153,155 @@ header h1 i {
     min-height: 400px;
 }
 
-/* 新的視覺化時間軸 */
+/* 甘特圖樣式時間軸 */
 .timeline {
     position: relative;
     padding: 2rem 0;
+    overflow-x: auto;
+    min-height: 600px;
 }
 
-/* 主時間軸線 */
-.timeline::before {
-    content: '';
+/* 時間軸網格背景 */
+.timeline-grid {
     position: absolute;
-    left: 80px;
     top: 0;
+    left: 0;
+    right: 0;
     bottom: 0;
-    width: 4px;
-    background: linear-gradient(to bottom, #667eea, #764ba2);
-    border-radius: 2px;
     z-index: 1;
 }
 
-/* 年份分組 */
-.year-group {
-    margin-bottom: 3rem;
-    position: relative;
-}
-
-.year-header {
+/* 年份標題行 */
+.timeline-years {
+    position: sticky;
+    top: 0;
+    height: 60px;
+    background: white;
+    border-bottom: 2px solid #e0e0e0;
     display: flex;
     align-items: center;
-    margin-bottom: 2rem;
+    z-index: 10;
+    margin-bottom: 20px;
+}
+
+/* 時間軸內容區域 */
+.timeline-content-area {
     position: relative;
-    z-index: 2;
+    min-height: 500px;
 }
 
-.year-header::before {
-    content: '';
-    position: absolute;
-    left: 62px;
-    width: 36px;
-    height: 36px;
-    background: #667eea;
-    border-radius: 50%;
-    border: 4px solid white;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-    z-index: 3;
+/* 年份標記 */
+.year-marker {
+    flex: 0 0 auto;
+    width: 80px;
+    text-align: center;
+    font-weight: 600;
+    color: #666;
+    border-right: 1px solid #e0e0e0;
+    padding: 0 10px;
 }
 
-.year-title {
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: #333;
-    background: white;
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-
-/* 時間軸事件項目 */
+/* 甘特圖事件項目 */
 .timeline-item {
-    position: relative;
-    margin-bottom: 2rem;
-    display: flex;
-    align-items: flex-start;
-    z-index: 2;
-}
-
-.timeline-item::before {
-    content: '';
     position: absolute;
-    left: 70px;
-    top: 20px;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    border: 4px solid white;
+    height: 50px;
+    border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    z-index: 3;
-}
-
-.timeline-content {
-    background: white;
-    border-radius: 12px;
-    padding: 1.5rem;
-    margin-left: 120px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-    border-left: 4px solid;
     transition: all 0.3s ease;
-    position: relative;
-    width: calc(100% - 120px);
+    cursor: pointer;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    min-width: 120px;
 }
 
-.timeline-content:hover {
+.timeline-item:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    z-index: 6;
 }
 
-.timeline-content::before {
-    content: '';
+/* 事件內容 */
+.timeline-content {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+    font-weight: 500;
+}
+
+.timeline-content h3 {
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: 1;
+}
+
+.timeline-actions {
+    display: flex;
+    gap: 5px;
+    margin-left: 10px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.timeline-item:hover .timeline-actions {
+    opacity: 1;
+}
+
+.timeline-actions button {
+    background: rgba(255,255,255,0.2);
+    border: none;
+    border-radius: 4px;
+    color: white;
+    padding: 4px 8px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.timeline-actions button:hover {
+    background: rgba(255,255,255,0.3);
+}
+
+/* 事件詳情提示 */
+.timeline-tooltip {
     position: absolute;
-    left: -15px;
-    top: 20px;
-    width: 0;
-    height: 0;
-    border-top: 8px solid transparent;
-    border-bottom: 8px solid transparent;
-    border-right: 15px solid white;
+    background: rgba(0,0,0,0.9);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    max-width: 300px;
+    z-index: 100;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    white-space: nowrap;
+    top: -35px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.timeline-item:hover .timeline-tooltip {
+    opacity: 1;
+}
+
+/* 時間軸行 */
+.timeline-row {
+    position: relative;
+    height: 70px;
+    border-bottom: 1px solid #f0f0f0;
+    margin-bottom: 10px;
+}
+
+.timeline-row:last-child {
+    border-bottom: none;
 }
 
 .timeline-header {
@@ -349,90 +393,34 @@ header h1 i {
     color: #666;
 }
 
-/* 不同類別的顏色 */
-.timeline-item.work .timeline-content {
-    border-left-color: #667eea;
+/* 甘特圖不同類別的顏色 */
+.timeline-item.work {
+    background: linear-gradient(135deg, #667eea, #764ba2);
 }
 
-.timeline-item.work::before {
-    background: #667eea;
+.timeline-item.education {
+    background: linear-gradient(135deg, #f093fb, #f5576c);
 }
 
-.timeline-item.work .timeline-category {
-    background: #667eea;
+.timeline-item.personal {
+    background: linear-gradient(135deg, #4facfe, #00f2fe);
 }
 
-.timeline-item.education .timeline-content {
-    border-left-color: #f093fb;
+.timeline-item.achievement {
+    background: linear-gradient(135deg, #43e97b, #38f9d7);
 }
 
-.timeline-item.education::before {
-    background: #f093fb;
+.timeline-item.travel {
+    background: linear-gradient(135deg, #fa709a, #fee140);
 }
 
-.timeline-item.education .timeline-category {
-    background: #f093fb;
-}
-
-.timeline-item.personal .timeline-content {
-    border-left-color: #4facfe;
-}
-
-.timeline-item.personal::before {
-    background: #4facfe;
-}
-
-.timeline-item.personal .timeline-category {
-    background: #4facfe;
-}
-
-.timeline-item.achievement .timeline-content {
-    border-left-color: #43e97b;
-}
-
-.timeline-item.achievement::before {
-    background: #43e97b;
-}
-
-.timeline-item.achievement .timeline-category {
-    background: #43e97b;
-}
-
-.timeline-item.travel .timeline-content {
-    border-left-color: #fa709a;
-}
-
-.timeline-item.travel::before {
-    background: #fa709a;
-}
-
-.timeline-item.travel .timeline-category {
-    background: #fa709a;
-}
-
-.timeline-item.family .timeline-content {
-    border-left-color: #ffecd2;
-}
-
-.timeline-item.family::before {
-    background: #ffecd2;
-}
-
-.timeline-item.family .timeline-category {
-    background: #ffecd2;
+.timeline-item.family {
+    background: linear-gradient(135deg, #ffecd2, #fcb69f);
     color: #333;
 }
 
-.timeline-item.other .timeline-content {
-    border-left-color: #a8edea;
-}
-
-.timeline-item.other::before {
-    background: #a8edea;
-}
-
-.timeline-item.other .timeline-category {
-    background: #a8edea;
+.timeline-item.other {
+    background: linear-gradient(135deg, #a8edea, #fed6e3);
     color: #333;
 }
 
