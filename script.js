@@ -159,7 +159,20 @@ class TimelineApp {
 
     getDefaultData() {
         return [
-     
+            {
+                id: 1752383058040,
+                startYear: 2022,
+                startMonth: 11,
+                endYear: 2024,
+                endMonth: 7,
+                year: 2022, // 用於排序
+                month: 11,
+                title: "Clear Island Co., Ltd. - Investment Analyst/Execution Trader",
+                description: "• Conducted rolling linear regression analysis on U.S. and Taiwanese markets, uncovering structural differences in trend consistency that informed cross-market asset allocation strategies.\n\n• Designed and implemented a Python-based business-cycle timing model to identify optimal entry points. Backtests demonstrated an 81%+ win rate in low-EPS technology sectors during pre-expansions, with maximum drawdowns of 24% and annualized returns exceeding 33% over a five-year period.\n\n• Developed a dynamic VaR estimation system by integrating historical performance analysis and 20-day rolling volatility metrics in Python. Leveraged Monte Carlo simulation results to conduct weekly portfolio reviews and tactical reallocations, ensuring adherence to predefined risk tolerance levels.\n\n• Managed a US$350,000 AUM portfolio in the U.S. market from December 2022 to July 2024, delivering a 164.12% (Annualized: 88.87%) cumulative time-weighted return with a maximum drawdown of 17%. (SPY: Annualized: 11.5% Max Drawdown: 12%, NASDAQ: Annualized: 20.3% Max Drawdown 25%)",
+                category: "work",
+                images: [],
+                createdAt: "2025-01-18T10:00:00.000Z"
+            },
             {
                 id: 1752383058032,
                 year: 2025,
