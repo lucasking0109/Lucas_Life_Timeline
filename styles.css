@@ -153,109 +153,159 @@ header h1 i {
     min-height: 400px;
 }
 
-/* 時間軸 */
+/* 新的視覺化時間軸 */
 .timeline {
     position: relative;
-    padding-left: 3rem;
+    padding: 2rem 0;
 }
 
+/* 主時間軸線 */
 .timeline::before {
     content: '';
     position: absolute;
-    left: 2rem;
+    left: 80px;
     top: 0;
     bottom: 0;
-    width: 3px;
+    width: 4px;
     background: linear-gradient(to bottom, #667eea, #764ba2);
     border-radius: 2px;
+    z-index: 1;
 }
 
 /* 年份分組 */
 .year-group {
     margin-bottom: 3rem;
+    position: relative;
 }
 
 .year-header {
     display: flex;
     align-items: center;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
     position: relative;
+    z-index: 2;
 }
 
 .year-header::before {
     content: '';
     position: absolute;
-    left: -3.5rem;
-    width: 1rem;
-    height: 1rem;
+    left: 62px;
+    width: 36px;
+    height: 36px;
     background: #667eea;
     border-radius: 50%;
-    border: 3px solid white;
+    border: 4px solid white;
     box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    z-index: 3;
 }
 
 .year-title {
     font-size: 1.8rem;
     font-weight: 700;
     color: #333;
-    margin-left: 1rem;
+    background: white;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
-/* 事件項目 */
-.event-item {
+/* 時間軸事件項目 */
+.timeline-item {
     position: relative;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: flex-start;
+    z-index: 2;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: 70px;
+    top: 20px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 4px solid white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    z-index: 3;
+}
+
+.timeline-content {
     background: white;
     border-radius: 12px;
     padding: 1.5rem;
-    margin-bottom: 1.5rem;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-    border-left: 4px solid #667eea;
+    margin-left: 120px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    border-left: 4px solid;
     transition: all 0.3s ease;
+    position: relative;
+    width: calc(100% - 120px);
 }
 
-.event-item:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+.timeline-content:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
 }
 
-.event-item::before {
+.timeline-content::before {
     content: '';
     position: absolute;
-    left: -2.75rem;
-    top: 1.5rem;
-    width: 0.8rem;
-    height: 0.8rem;
-    background: #667eea;
-    border-radius: 50%;
-    border: 2px solid white;
+    left: -15px;
+    top: 20px;
+    width: 0;
+    height: 0;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-right: 15px solid white;
 }
 
-.event-header {
+.timeline-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
 }
 
-.event-title {
-    font-size: 1.3rem;
+.timeline-header h3 {
+    font-size: 1.4rem;
     font-weight: 600;
     color: #333;
-    margin-bottom: 0.3rem;
+    margin: 0;
+    line-height: 1.3;
 }
 
-.event-date {
+.timeline-date {
     font-size: 0.9rem;
+    color: #666;
+    font-weight: 500;
+    margin-top: 0.3rem;
+}
+
+.timeline-category {
+    display: inline-block;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: white;
+    margin-top: 0.5rem;
     color: #666;
     font-weight: 500;
 }
 
-.event-actions {
+.timeline-description {
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.timeline-actions {
     display: flex;
     gap: 0.5rem;
 }
 
-.event-actions button {
+.timeline-actions button {
     padding: 0.4rem 0.8rem;
     border: none;
     background: none;
@@ -300,60 +350,90 @@ header h1 i {
 }
 
 /* 不同類別的顏色 */
-.event-item.work {
-    border-left-color: #007bff;
+.timeline-item.work .timeline-content {
+    border-left-color: #667eea;
 }
 
-.event-item.work::before {
-    background: #007bff;
+.timeline-item.work::before {
+    background: #667eea;
 }
 
-.event-item.education {
-    border-left-color: #28a745;
+.timeline-item.work .timeline-category {
+    background: #667eea;
 }
 
-.event-item.education::before {
-    background: #28a745;
+.timeline-item.education .timeline-content {
+    border-left-color: #f093fb;
 }
 
-.event-item.personal {
-    border-left-color: #ffc107;
+.timeline-item.education::before {
+    background: #f093fb;
 }
 
-.event-item.personal::before {
-    background: #ffc107;
+.timeline-item.education .timeline-category {
+    background: #f093fb;
 }
 
-.event-item.achievement {
-    border-left-color: #ff6b6b;
+.timeline-item.personal .timeline-content {
+    border-left-color: #4facfe;
 }
 
-.event-item.achievement::before {
-    background: #ff6b6b;
+.timeline-item.personal::before {
+    background: #4facfe;
 }
 
-.event-item.travel {
-    border-left-color: #17a2b8;
+.timeline-item.personal .timeline-category {
+    background: #4facfe;
 }
 
-.event-item.travel::before {
-    background: #17a2b8;
+.timeline-item.achievement .timeline-content {
+    border-left-color: #43e97b;
 }
 
-.event-item.family {
-    border-left-color: #e83e8c;
+.timeline-item.achievement::before {
+    background: #43e97b;
 }
 
-.event-item.family::before {
-    background: #e83e8c;
+.timeline-item.achievement .timeline-category {
+    background: #43e97b;
 }
 
-.event-item.other {
-    border-left-color: #6c757d;
+.timeline-item.travel .timeline-content {
+    border-left-color: #fa709a;
 }
 
-.event-item.other::before {
-    background: #6c757d;
+.timeline-item.travel::before {
+    background: #fa709a;
+}
+
+.timeline-item.travel .timeline-category {
+    background: #fa709a;
+}
+
+.timeline-item.family .timeline-content {
+    border-left-color: #ffecd2;
+}
+
+.timeline-item.family::before {
+    background: #ffecd2;
+}
+
+.timeline-item.family .timeline-category {
+    background: #ffecd2;
+    color: #333;
+}
+
+.timeline-item.other .timeline-content {
+    border-left-color: #a8edea;
+}
+
+.timeline-item.other::before {
+    background: #a8edea;
+}
+
+.timeline-item.other .timeline-category {
+    background: #a8edea;
+    color: #333;
 }
 
 /* 空狀態 */

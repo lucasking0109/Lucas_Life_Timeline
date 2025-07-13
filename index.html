@@ -84,25 +84,78 @@
             </div>
             <form id="eventForm">
                 <div class="form-group">
-                    <label for="eventYear">年份</label>
-                    <input type="number" id="eventYear" min="1900" max="2100" required>
+                    <label>
+                        <input type="checkbox" id="isTimeRange"> 這是一個時間段事件
+                    </label>
                 </div>
-                <div class="form-group">
-                    <label for="eventMonth">月份</label>
-                    <select id="eventMonth" required>
-                        <option value="1">1月</option>
-                        <option value="2">2月</option>
-                        <option value="3">3月</option>
-                        <option value="4">4月</option>
-                        <option value="5">5月</option>
-                        <option value="6">6月</option>
-                        <option value="7">7月</option>
-                        <option value="8">8月</option>
-                        <option value="9">9月</option>
-                        <option value="10">10月</option>
-                        <option value="11">11月</option>
-                        <option value="12">12月</option>
-                    </select>
+                
+                <div id="singleTimeInputs">
+                    <div class="form-group">
+                        <label for="eventYear">年份</label>
+                        <input type="number" id="eventYear" min="1900" max="2100" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="eventMonth">月份</label>
+                        <select id="eventMonth" required>
+                            <option value="1">1月</option>
+                            <option value="2">2月</option>
+                            <option value="3">3月</option>
+                            <option value="4">4月</option>
+                            <option value="5">5月</option>
+                            <option value="6">6月</option>
+                            <option value="7">7月</option>
+                            <option value="8">8月</option>
+                            <option value="9">9月</option>
+                            <option value="10">10月</option>
+                            <option value="11">11月</option>
+                            <option value="12">12月</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div id="timeRangeInputs" style="display: none;">
+                    <div class="form-group">
+                        <label for="startYear">開始年份</label>
+                        <input type="number" id="startYear" min="1900" max="2100">
+                    </div>
+                    <div class="form-group">
+                        <label for="startMonth">開始月份</label>
+                        <select id="startMonth">
+                            <option value="1">1月</option>
+                            <option value="2">2月</option>
+                            <option value="3">3月</option>
+                            <option value="4">4月</option>
+                            <option value="5">5月</option>
+                            <option value="6">6月</option>
+                            <option value="7">7月</option>
+                            <option value="8">8月</option>
+                            <option value="9">9月</option>
+                            <option value="10">10月</option>
+                            <option value="11">11月</option>
+                            <option value="12">12月</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="endYear">結束年份</label>
+                        <input type="number" id="endYear" min="1900" max="2100">
+                    </div>
+                    <div class="form-group">
+                        <label for="endMonth">結束月份</label>
+                        <select id="endMonth">
+                            <option value="1">1月</option>
+                            <option value="2">2月</option>
+                            <option value="3">3月</option>
+                            <option value="4">4月</option>
+                            <option value="5">5月</option>
+                            <option value="6">6月</option>
+                            <option value="7">7月</option>
+                            <option value="8">8月</option>
+                            <option value="9">9月</option>
+                            <option value="10">10月</option>
+                            <option value="11">11月</option>
+                            <option value="12">12月</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="eventTitle">事件標題</label>

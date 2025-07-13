@@ -28,6 +28,12 @@ class TimelineApp {
         this.categoryFilter = document.getElementById('categoryFilter');
         this.imageInput = document.querySelector('.image-input');
         this.imagePreview = document.querySelector('.image-preview');
+        
+        // 時間段輸入相關元素
+        this.isTimeRangeCheckbox = document.getElementById('isTimeRange');
+        this.singleTimeInputs = document.getElementById('singleTimeInputs');
+        this.timeRangeInputs = document.getElementById('timeRangeInputs');
+        
         this.createWebsiteExportBtn();
     }
 
@@ -49,12 +55,45 @@ class TimelineApp {
             this.imageInput.addEventListener('change', (e) => this.handleImageUpload(e));
         }
         
+        // 時間段切換事件
+        if (this.isTimeRangeCheckbox) {
+            this.isTimeRangeCheckbox.addEventListener('change', () => this.toggleTimeRangeInputs());
+        }
+        
         // 關閉modal的事件
         document.addEventListener('click', (e) => {
             if (e.target.classList.contains('modal-overlay') || e.target.classList.contains('close-btn')) {
                 this.closeModal();
             }
         });
+    }
+
+    toggleTimeRangeInputs() {
+        if (this.isTimeRangeCheckbox && this.singleTimeInputs && this.timeRangeInputs) {
+            if (this.isTimeRangeCheckbox.checked) {
+                this.singleTimeInputs.style.display = 'none';
+                this.timeRangeInputs.style.display = 'block';
+                
+                // 更新required屬性
+                document.getElementById('eventYear').required = false;
+                document.getElementById('eventMonth').required = false;
+                document.getElementById('startYear').required = true;
+                document.getElementById('startMonth').required = true;
+                document.getElementById('endYear').required = true;
+                document.getElementById('endMonth').required = true;
+            } else {
+                this.singleTimeInputs.style.display = 'block';
+                this.timeRangeInputs.style.display = 'none';
+                
+                // 更新required屬性
+                document.getElementById('eventYear').required = true;
+                document.getElementById('eventMonth').required = true;
+                document.getElementById('startYear').required = false;
+                document.getElementById('startMonth').required = false;
+                document.getElementById('endYear').required = false;
+                document.getElementById('endMonth').required = false;
+            }
+        }
     }
 
     createWebsiteExportBtn() {
@@ -128,8 +167,12 @@ class TimelineApp {
             },
             {
                 id: 1752382065035,
-                year: 2025,
-                month: 3,
+                startYear: 2023,
+                startMonth: 5,
+                endYear: 2025,
+                endMonth: 5,
+                year: 2023, // 用於排序
+                month: 5,
                 title: "Big Data Cleaning and Application",
                 description: "1. 使用 Pyspark 處理來自 Polygon.io 的 400 多隻股票 2023/05-2025/05 的分鐘級別資料，改為 Parquet 格式方便快速處理\n\n2. 發現商品異常值並計算 VWAP，並比較 data 與其他資料來源的差異性\n\n3. 對資料進行回歸分析、證實報酬率不符合常態分佈、分析絕大部分股票交易量主要集中於每日收盤前半小時、使用 ACF 分析大部分報酬率不具有滯後性",
                 category: "work",
@@ -254,15 +297,35 @@ class TimelineApp {
         if (event) {
             // 編輯模式
             document.getElementById('eventTitle').value = event.title;
-            document.getElementById('eventYear').value = event.year;
-            document.getElementById('eventMonth').value = event.month;
             document.getElementById('eventDescription').value = event.description;
             document.getElementById('eventCategory').value = event.category;
+            
+            // 檢查是否為時間段事件
+            const isTimeRange = event.startYear && event.endYear;
+            this.isTimeRangeCheckbox.checked = isTimeRange;
+            
+            if (isTimeRange) {
+                // 時間段事件
+                document.getElementById('startYear').value = event.startYear;
+                document.getElementById('startMonth').value = event.startMonth;
+                document.getElementById('endYear').value = event.endYear;
+                document.getElementById('endMonth').value = event.endMonth;
+            } else {
+                // 單一時間點事件
+                document.getElementById('eventYear').value = event.year;
+                document.getElementById('eventMonth').value = event.month;
+            }
+            
+            // 切換顯示相應的輸入框
+            this.toggleTimeRangeInputs();
         } else {
             // 新增模式
             if (this.eventForm) {
                 this.eventForm.reset();
             }
+            // 重置為單一時間點模式
+            this.isTimeRangeCheckbox.checked = false;
+            this.toggleTimeRangeInputs();
         }
     }
 
@@ -270,27 +333,40 @@ class TimelineApp {
         e.preventDefault();
         
         const title = document.getElementById('eventTitle').value;
-        const year = parseInt(document.getElementById('eventYear').value);
-        const month = parseInt(document.getElementById('eventMonth').value);
         const description = document.getElementById('eventDescription').value;
         const category = document.getElementById('eventCategory').value;
+        const isTimeRange = this.isTimeRangeCheckbox.checked;
+        
+        let eventData = {
+            title,
+            description,
+            category
+        };
+        
+        if (isTimeRange) {
+            // 時間段模式
+            eventData.startYear = parseInt(document.getElementById('startYear').value);
+            eventData.startMonth = parseInt(document.getElementById('startMonth').value);
+            eventData.endYear = parseInt(document.getElementById('endYear').value);
+            eventData.endMonth = parseInt(document.getElementById('endMonth').value);
+            
+            // 為了排序，使用開始時間作為主要排序依據
+            eventData.year = eventData.startYear;
+            eventData.month = eventData.startMonth;
+        } else {
+            // 單一時間點模式
+            eventData.year = parseInt(document.getElementById('eventYear').value);
+            eventData.month = parseInt(document.getElementById('eventMonth').value);
+        }
         
         if (this.currentEditingEvent) {
             // 編輯現有事件
-            this.currentEditingEvent.title = title;
-            this.currentEditingEvent.year = year;
-            this.currentEditingEvent.month = month;
-            this.currentEditingEvent.description = description;
-            this.currentEditingEvent.category = category;
+            Object.assign(this.currentEditingEvent, eventData);
         } else {
             // 新增事件
             const newEvent = {
                 id: Date.now(),
-                title,
-                year,
-                month,
-                description,
-                category,
+                ...eventData,
                 images: [],
                 createdAt: new Date().toISOString()
             };
@@ -348,19 +424,39 @@ class TimelineApp {
         const monthNames = ['', '一月', '二月', '三月', '四月', '五月', '六月', 
                            '七月', '八月', '九月', '十月', '十一月', '十二月'];
         
+        // 支持時間段顯示
+        let dateDisplay = '';
+        if (event.startYear && event.endYear) {
+            // 時間段格式
+            if (event.startYear === event.endYear) {
+                if (event.startMonth === event.endMonth) {
+                    dateDisplay = `${event.startYear}年${monthNames[event.startMonth]}`;
+                } else {
+                    dateDisplay = `${event.startYear}年${monthNames[event.startMonth]} - ${monthNames[event.endMonth]}`;
+                }
+            } else {
+                dateDisplay = `${event.startYear}年${monthNames[event.startMonth]} - ${event.endYear}年${monthNames[event.endMonth]}`;
+            }
+        } else {
+            // 向後兼容舊格式
+            dateDisplay = `${event.year}年${monthNames[event.month]}`;
+        }
+        
         return `
             <div class="timeline-item ${event.category}" data-id="${event.id}">
                 <div class="timeline-content">
                     <div class="timeline-header">
-                        <h3>${this.escapeHtml(event.title)}</h3>
-                        <div class="timeline-date">${event.year}年${monthNames[event.month]}</div>
-                        <div class="timeline-category">${this.getCategoryName(event.category)}</div>
+                        <div>
+                            <h3>${this.escapeHtml(event.title)}</h3>
+                            <div class="timeline-date">${dateDisplay}</div>
+                            <div class="timeline-category">${this.getCategoryName(event.category)}</div>
+                        </div>
+                        <div class="timeline-actions">
+                            <button onclick="app.openModal(app.getEventById(${event.id}))" class="edit-btn">編輯</button>
+                            <button onclick="app.deleteEvent(${event.id})" class="delete-btn">刪除</button>
+                        </div>
                     </div>
                     <p class="timeline-description">${this.escapeHtml(event.description).replace(/\n/g, '<br>')}</p>
-                    <div class="timeline-actions">
-                        <button onclick="app.openModal(app.getEventById(${event.id}))" class="edit-btn">編輯</button>
-                        <button onclick="app.deleteEvent(${event.id})" class="delete-btn">刪除</button>
-                    </div>
                 </div>
             </div>
         `;
