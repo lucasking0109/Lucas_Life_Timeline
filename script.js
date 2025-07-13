@@ -221,12 +221,8 @@ class TimelineApp {
             },
             {
                 id: 1752382065035,
-                startYear: 2023,
-                startMonth: 5,
-                endYear: 2025,
-                endMonth: 5,
-                year: 2023, // 用於排序
-                month: 5,
+                year: 2025,
+                month: 4,
                 title: "Big Data Cleaning and Application",
                 description: "1. 使用 Pyspark 處理來自 Polygon.io 的 400 多隻股票 2023/05-2025/05 的分鐘級別資料，改為 Parquet 格式方便快速處理\n\n2. 發現商品異常值並計算 VWAP，並比較 data 與其他資料來源的差異性\n\n3. 對資料進行回歸分析、證實報酬率不符合常態分佈、分析絕大部分股票交易量主要集中於每日收盤前半小時、使用 ACF 分析大部分報酬率不具有滯後性",
                 category: "work",
@@ -277,8 +273,8 @@ class TimelineApp {
                 id: 1752382347468,
                 year: 2023,
                 month: 6,
-                title: "Graduated from National Taiwan University",
-                description: "",
+                title: "Graduated from Soochow University",
+                description: "Business Administration 學士",
                 category: "education",
                 images: [],
                 createdAt: "2025-07-13T04:52:27.468Z"
