@@ -121,19 +121,20 @@ class TimelineApp {
     }
 
     async loadEvents() {
-        if (this.isNetlifyEnvironment) {
+        // 首先嘗試從localStorage載入
+        const stored = localStorage.getItem('timelineEvents');
+        
+        if (stored) {
+            // 如果localStorage有數據，使用它
+            this.events = JSON.parse(stored);
+        } else if (this.isNetlifyEnvironment) {
+            // 如果在Netlify環境且沒有本地數據，嘗試從API載入
             await this.loadDataFromAPI();
         } else {
-            const stored = localStorage.getItem('timelineEvents');
-            this.events = stored ? JSON.parse(stored) : this.getDefaultData();
-        }
-        
-        // 在Netlify環境中也保存到localStorage以便後續使用
-        if (this.isNetlifyEnvironment) {
-            const stored = localStorage.getItem('timelineEvents');
-            if (!stored) {
-                localStorage.setItem('timelineEvents', JSON.stringify(this.events));
-            }
+            // 如果都沒有，使用默認數據
+            this.events = this.getDefaultData();
+            // 立即保存到localStorage
+            localStorage.setItem('timelineEvents', JSON.stringify(this.events));
         }
     }
 
@@ -151,6 +152,9 @@ class TimelineApp {
             console.log('API連接失敗，使用默認數據:', error);
             this.events = this.getDefaultData();
         }
+        
+        // 將載入的數據保存到localStorage
+        localStorage.setItem('timelineEvents', JSON.stringify(this.events));
     }
 
     getDefaultData() {
@@ -633,6 +637,18 @@ class TimelineApp {
         document.body.removeChild(textarea);
         
         this.showToast('數據已複製到剪貼板！請貼到 script.js 的 getDefaultData() 方法中');
+    }
+    
+    // 重置數據到默認狀態
+    resetToDefault() {
+        if (confirm('確定要重置所有數據到默認狀態嗎？這將刪除所有編輯的內容。')) {
+            localStorage.removeItem('timelineEvents');
+            this.events = this.getDefaultData();
+            localStorage.setItem('timelineEvents', JSON.stringify(this.events));
+            this.renderTimeline();
+            this.updateYearFilter();
+            this.showToast('數據已重置到默認狀態！');
+        }
     }
 }
 
