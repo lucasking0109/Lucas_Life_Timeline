@@ -12,6 +12,8 @@ class TimelineApp {
     }
 
     async init() {
+        this.initializeElements();
+        this.bindEvents();
         await this.loadEvents();
         this.renderTimeline();
         this.updateYearFilter();
@@ -88,8 +90,11 @@ class TimelineApp {
         }
         
         // 在Netlify環境中也保存到localStorage以便後續使用
-        if (this.isNetlifyEnvironment && !stored) {
-            localStorage.setItem('timelineEvents', JSON.stringify(this.events));
+        if (this.isNetlifyEnvironment) {
+            const stored = localStorage.getItem('timelineEvents');
+            if (!stored) {
+                localStorage.setItem('timelineEvents', JSON.stringify(this.events));
+            }
         }
     }
 
@@ -449,7 +454,8 @@ class TimelineApp {
 }
 
 // 等待DOM加載完成後初始化
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
     const app = new TimelineApp();
+    await app.init();
     window.app = app;
 });
