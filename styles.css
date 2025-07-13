@@ -299,6 +299,9 @@ header h1 i {
     color: #555;
     line-height: 1.6;
     margin-bottom: 1rem;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    word-break: break-word;
 }
 
 .timeline-actions {
@@ -348,12 +351,6 @@ header h1 i {
     margin-top: 0.5rem;
     color: #666;
     font-weight: 500;
-}
-
-.timeline-description {
-    color: #555;
-    line-height: 1.6;
-    margin-bottom: 1rem;
 }
 
 .timeline-actions {
