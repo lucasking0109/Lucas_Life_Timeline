@@ -159,16 +159,7 @@ class TimelineApp {
 
     getDefaultData() {
         return [
-            {
-                id: 1752383058031,
-                year: 2025,
-                month: 7,
-                title: "使用 Claude Artifact 創建個人網頁",
-                description: "透過 Claude 的 Artifact 功能創建了一個個人時間軸網頁，展示人生的重要時刻和里程碑。這個專案讓我學習了 HTML、CSS 和 JavaScript 的應用，也體驗了 AI 輔助開發的強大潛力。",
-                category: "work",
-                images: [],
-                createdAt: "2025-07-13T05:30:58.031Z"
-            },
+     
             {
                 id: 1752383058032,
                 year: 2025,
