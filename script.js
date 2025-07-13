@@ -166,6 +166,56 @@ class TimelineApp {
                 createdAt: "2025-07-13T05:30:58.031Z"
             },
             {
+                id: 1752383058032,
+                year: 2025,
+                month: 7,
+                title: "威旭旗下新公司--威鯨 實習",
+                description: "在參加完線上coding測驗+金融考試+主管面試+HR面試後，當場錄取在Strategy Research Lab當任AI Data Scientists Intern，專研應用LLM 以及訓練agent進行量化交易",
+                category: "work",
+                images: [],
+                createdAt: "2025-07-13T05:30:58.032Z"
+            },
+            {
+                id: 1752383058033,
+                year: 2025,
+                month: 5,
+                title: "CFA Level 2 Passed",
+                description: "",
+                category: "personal",
+                images: [],
+                createdAt: "2025-07-13T05:30:58.033Z"
+            },
+            {
+                id: 1752383058034,
+                year: 2025,
+                month: 5,
+                title: "利用 NLP 自動辨識 Mutual Fund Prospectus 的投資風格",
+                description: "1. 資料預處理、分詞 2. 用 Skip-gram Word2Vec 生成專屬詞向量 3. 建立 Knowledge Base 計算文件向量與風格中心的餘弦距離作為額外特徵 4. 基於特徵及向量進行分類，使用 Regression, Random Forest, XGBoost 5. 在 test data 上進行評估，最終達成可以自動辨識基金風格的系統，最終在 test data 上 XGBoost 分類模型達到 66% 的 Accuracy",
+                category: "work",
+                images: [],
+                createdAt: "2025-07-13T05:30:58.034Z"
+            },
+            {
+                id: 1752383058035,
+                year: 2025,
+                month: 4,
+                title: "Kaggle Competition: Company Bankruptcy Prediction",
+                description: "1. 資料預處理: 用 StandardScaler 對所有特徵標準化，針對「破產」與「未破產」兩類資料極度不均衡，於每個交叉驗證折內使用 SMOTE 進行過採樣 2. 建立 Pipeline 串接 StandardScaler → SMOTE → 分類器，保證 resampling 僅發生在訓練階段，避免資料外洩互相污染 3. 嘗試多種分類演算法:Random Forest、Support Vector Machine (SVM)、XGBoost，以 F1 score 作為主要優化指標進行最佳化 4. 交叉驗證調校：在每個 CV 折內計算佳參數，Random Forest 與 XGBoost 於驗證集上均能取得約 0.50 左右的 F1 score 5. XGBoost 模型在測試集達到 0.46 的 F1 score，展現 PR97 的 model 穩定度",
+                category: "work",
+                images: [],
+                createdAt: "2025-07-13T05:30:58.035Z"
+            },
+            {
+                id: 1752383058036,
+                year: 2025,
+                month: 3,
+                title: "IMC Prosperity 3",
+                description: "獲得全球 top 1% 名次，台灣第一名 (第 133 名/總共 12621 隊伍)",
+                category: "personal",
+                images: [],
+                createdAt: "2025-07-13T05:30:58.036Z"
+            },
+            {
                 id: 1752382065035,
                 startYear: 2023,
                 startMonth: 5,
@@ -414,154 +464,55 @@ class TimelineApp {
             filteredEvents = filteredEvents.filter(event => event.category === selectedCategory);
         }
         
+        // 按年份和月份排序（新到舊）
+        filteredEvents.sort((a, b) => {
+            if (a.year !== b.year) return b.year - a.year;
+            return b.month - a.month;
+        });
+        
         if (filteredEvents.length === 0) {
             this.timelineContainer.innerHTML = '<div class="empty-state show"><div class="empty-icon">📅</div><h3>還沒有任何事件</h3><p>點擊上方的「新增事件」按鈕開始記錄你的人生時間軸</p></div>';
             return;
         }
         
-        this.renderGanttChart(filteredEvents);
-    }
-    
-    renderGanttChart(events) {
-        // 計算時間範圍
-        const timeRange = this.calculateTimeRange(events);
+        // 按年份分組
+        const eventsByYear = {};
+        filteredEvents.forEach(event => {
+            if (!eventsByYear[event.year]) {
+                eventsByYear[event.year] = [];
+            }
+            eventsByYear[event.year].push(event);
+        });
         
-        // 創建甘特圖HTML
         let html = '<div class="timeline">';
         
-        // 創建年份標題行
-        html += '<div class="timeline-years">';
-        html += '<div class="year-marker">事件</div>';
-        
-        for (let year = timeRange.startYear; year <= timeRange.endYear; year++) {
-            const yearStartMonth = year === timeRange.startYear ? timeRange.startMonth : 1;
-            const yearEndMonth = year === timeRange.endYear ? timeRange.endMonth : 12;
-            const yearWidth = (yearEndMonth - yearStartMonth + 1) * 80; // 每個月80px
+        Object.keys(eventsByYear).sort((a, b) => b - a).forEach(year => {
+            html += `<div class="year-group">
+                        <div class="year-header">
+                            <h2 class="year-title">${year}年</h2>
+                        </div>`;
             
-            html += `<div class="year-marker" style="width: ${yearWidth}px; border-right: 2px solid #ccc;">${year}</div>`;
-        }
+            eventsByYear[year].forEach(event => {
+                html += this.createEventElement(event);
+            });
+            
+            html += '</div>';
+        });
+        
         html += '</div>';
-        
-        // 創建事件內容區域
-        html += '<div class="timeline-content-area">';
-        
-        // 按時間排序事件
-        events.sort((a, b) => {
-            const aStart = (a.startYear || a.year) * 12 + (a.startMonth || a.month);
-            const bStart = (b.startYear || b.year) * 12 + (b.startMonth || b.month);
-            return aStart - bStart;
-        });
-        
-        // 計算事件的垂直位置（避免重疊）
-        const eventPositions = this.calculateEventPositions(events, timeRange);
-        
-        // 渲染每個事件
-        events.forEach((event, index) => {
-            const eventHtml = this.createGanttEventElement(event, timeRange, eventPositions[index]);
-            html += eventHtml;
-        });
-        
-        html += '</div></div>';
         this.timelineContainer.innerHTML = html;
     }
     
-    calculateTimeRange(events) {
-        let minYear = Infinity;
-        let maxYear = -Infinity;
-        let minMonth = 12;
-        let maxMonth = 1;
-        
-        events.forEach(event => {
-            const startYear = event.startYear || event.year;
-            const startMonth = event.startMonth || event.month;
-            const endYear = event.endYear || event.year;
-            const endMonth = event.endMonth || event.month;
-            
-            if (startYear < minYear || (startYear === minYear && startMonth < minMonth)) {
-                minYear = startYear;
-                minMonth = startMonth;
-            }
-            
-            if (endYear > maxYear || (endYear === maxYear && endMonth > maxMonth)) {
-                maxYear = endYear;
-                maxMonth = endMonth;
-            }
-        });
-        
-        const totalMonths = (maxYear - minYear) * 12 + (maxMonth - minMonth) + 1;
-        
-        return {
-            startYear: minYear,
-            startMonth: minMonth,
-            endYear: maxYear,
-            endMonth: maxMonth,
-            totalMonths: totalMonths
-        };
-    }
+
     
-    calculateEventPositions(events, timeRange) {
-        const positions = [];
-        const rows = [];
-        
-        events.forEach(event => {
-            const startYear = event.startYear || event.year;
-            const startMonth = event.startMonth || event.month;
-            const endYear = event.endYear || event.year;
-            const endMonth = event.endMonth || event.month;
-            
-            const startPos = (startYear - timeRange.startYear) * 12 + (startMonth - timeRange.startMonth);
-            const endPos = (endYear - timeRange.startYear) * 12 + (endMonth - timeRange.startMonth);
-            
-            // 找到可用的行
-            let rowIndex = 0;
-            while (rowIndex < rows.length) {
-                const row = rows[rowIndex];
-                let canPlace = true;
-                
-                for (let pos of row) {
-                    if (!(endPos < pos.start || startPos > pos.end)) {
-                        canPlace = false;
-                        break;
-                    }
-                }
-                
-                if (canPlace) {
-                    break;
-                }
-                rowIndex++;
-            }
-            
-            // 如果沒有可用的行，創建新行
-            if (rowIndex >= rows.length) {
-                rows.push([]);
-            }
-            
-            rows[rowIndex].push({ start: startPos, end: endPos });
-            positions.push(rowIndex);
-        });
-        
-        return positions;
-    }
-    
-    createGanttEventElement(event, timeRange, rowIndex) {
-        const startYear = event.startYear || event.year;
-        const startMonth = event.startMonth || event.month;
-        const endYear = event.endYear || event.year;
-        const endMonth = event.endMonth || event.month;
-        
-        // 計算位置和寬度
-        const startPos = (startYear - timeRange.startYear) * 12 + (startMonth - timeRange.startMonth);
-        const endPos = (endYear - timeRange.startYear) * 12 + (endMonth - timeRange.startMonth);
-        const width = (endPos - startPos + 1) * 80; // 每個月80px
-        const left = 80 + startPos * 80; // 80px是左側標籤寬度
-        const top = rowIndex * 80 + 20; // 每行80px高度
-        
+    createEventElement(event) {
         const monthNames = ['', '一月', '二月', '三月', '四月', '五月', '六月', 
                            '七月', '八月', '九月', '十月', '十一月', '十二月'];
         
-        // 創建日期顯示
+        // 支持時間段顯示
         let dateDisplay = '';
         if (event.startYear && event.endYear) {
+            // 時間段格式
             if (event.startYear === event.endYear) {
                 if (event.startMonth === event.endMonth) {
                     dateDisplay = `${event.startYear}年${monthNames[event.startMonth]}`;
@@ -572,24 +523,25 @@ class TimelineApp {
                 dateDisplay = `${event.startYear}年${monthNames[event.startMonth]} - ${event.endYear}年${monthNames[event.endMonth]}`;
             }
         } else {
+            // 向後兼容舊格式
             dateDisplay = `${event.year}年${monthNames[event.month]}`;
         }
         
         return `
-            <div class="timeline-item ${event.category}" 
-                 data-id="${event.id}" 
-                 style="left: ${left}px; top: ${top}px; width: ${width}px;">
+            <div class="timeline-item ${event.category}" data-id="${event.id}">
                 <div class="timeline-content">
-                    <h3>${this.escapeHtml(event.title)}</h3>
-                    <div class="timeline-actions">
-                        <button onclick="app.openModal(app.getEventById(${event.id}))" class="edit-btn">編輯</button>
-                        <button onclick="app.deleteEvent(${event.id})" class="delete-btn">刪除</button>
+                    <div class="timeline-header">
+                        <div>
+                            <h3>${this.escapeHtml(event.title)}</h3>
+                            <div class="timeline-date">${dateDisplay}</div>
+                            <div class="timeline-category">${this.getCategoryName(event.category)}</div>
+                        </div>
+                        <div class="timeline-actions">
+                            <button onclick="app.openModal(app.getEventById(${event.id}))" class="edit-btn">編輯</button>
+                            <button onclick="app.deleteEvent(${event.id})" class="delete-btn">刪除</button>
+                        </div>
                     </div>
-                </div>
-                <div class="timeline-tooltip">
-                    <strong>${this.escapeHtml(event.title)}</strong><br>
-                    ${dateDisplay}<br>
-                    ${this.getCategoryName(event.category)}
+                    <p class="timeline-description">${this.escapeHtml(event.description).replace(/\n/g, '<br>')}</p>
                 </div>
             </div>
         `;
