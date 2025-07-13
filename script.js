@@ -8,33 +8,48 @@ class TimelineApp {
         
         this.initializeElements();
         this.bindEvents();
-        this.loadEvents();
+        this.init();
+    }
+
+    async init() {
+        await this.loadEvents();
         this.renderTimeline();
         this.updateYearFilter();
     }
 
     initializeElements() {
         this.timelineContainer = document.querySelector('.timeline-container');
-        this.addEventBtn = document.querySelector('.add-event-btn');
+        this.addEventBtn = document.getElementById('addEventBtn');
         this.modal = document.querySelector('.modal');
         this.eventForm = document.querySelector('.event-form');
-        this.yearFilter = document.querySelector('.year-filter');
-        this.categoryFilter = document.querySelector('.category-filter');
+        this.yearFilter = document.getElementById('yearFilter');
+        this.categoryFilter = document.getElementById('categoryFilter');
         this.imageInput = document.querySelector('.image-input');
         this.imagePreview = document.querySelector('.image-preview');
         this.createWebsiteExportBtn();
     }
 
     bindEvents() {
-        this.addEventBtn.addEventListener('click', () => this.openModal());
-        this.eventForm.addEventListener('submit', (e) => this.handleFormSubmit(e));
-        this.yearFilter.addEventListener('change', () => this.renderTimeline());
-        this.categoryFilter.addEventListener('change', () => this.renderTimeline());
-        this.imageInput.addEventListener('change', (e) => this.handleImageUpload(e));
+        // 添加錯誤處理，確保元素存在才綁定事件
+        if (this.addEventBtn) {
+            this.addEventBtn.addEventListener('click', () => this.openModal());
+        }
+        if (this.eventForm) {
+            this.eventForm.addEventListener('submit', (e) => this.handleFormSubmit(e));
+        }
+        if (this.yearFilter) {
+            this.yearFilter.addEventListener('change', () => this.renderTimeline());
+        }
+        if (this.categoryFilter) {
+            this.categoryFilter.addEventListener('change', () => this.renderTimeline());
+        }
+        if (this.imageInput) {
+            this.imageInput.addEventListener('change', (e) => this.handleImageUpload(e));
+        }
         
         // 關閉modal的事件
         document.addEventListener('click', (e) => {
-            if (e.target.classList.contains('modal') || e.target.classList.contains('close-modal')) {
+            if (e.target.classList.contains('modal-overlay') || e.target.classList.contains('close-btn')) {
                 this.closeModal();
             }
         });
@@ -42,32 +57,34 @@ class TimelineApp {
 
     createWebsiteExportBtn() {
         const exportBtn = document.createElement('button');
-        exportBtn.textContent = 'Website Export';
+        exportBtn.textContent = '📋 複製數據';
         exportBtn.className = 'website-export-btn';
         exportBtn.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
             background: #f39c12;
             color: white;
             border: none;
-            padding: 8px 16px;
-            border-radius: 4px;
+            padding: 12px 20px;
+            border-radius: 25px;
             cursor: pointer;
-            margin-left: 10px;
+            font-size: 14px;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 1000;
+            transition: all 0.3s ease;
         `;
         exportBtn.addEventListener('click', () => this.exportDataForWebsite());
-        
-        const shareContainer = document.querySelector('.share-container');
-        if (shareContainer) {
-            shareContainer.appendChild(exportBtn);
-        }
+        document.body.appendChild(exportBtn);
     }
 
     async loadEvents() {
-        // 優先使用本地存儲，如果沒有則使用默認數據（包含您的真實數據）
-        const stored = localStorage.getItem('timelineEvents');
-        if (stored) {
-            this.events = JSON.parse(stored);
+        if (this.isNetlifyEnvironment) {
+            await this.loadDataFromAPI();
         } else {
-            this.events = this.getDefaultData();
+            const stored = localStorage.getItem('timelineEvents');
+            this.events = stored ? JSON.parse(stored) : this.getDefaultData();
         }
         
         // 在Netlify環境中也保存到localStorage以便後續使用
@@ -105,6 +122,36 @@ class TimelineApp {
                 createdAt: "2025-07-13T05:30:58.031Z"
             },
             {
+                id: 1752382065035,
+                year: 2025,
+                month: 3,
+                title: "Big Data Cleaning and Application",
+                description: "1. 使用 Pyspark 處理來自 Polygon.io 的 400 多隻股票 2023/05-2025/05 的分鐘級別資料，改為 Parquet 格式方便快速處理\n\n2. 發現商品異常值並計算 VWAP，並比較 data 與其他資料來源的差異性\n\n3. 對資料進行回歸分析、證實報酬率不符合常態分佈、分析絕大部分股票交易量主要集中於每日收盤前半小時、使用 ACF 分析大部分報酬率不具有滯後性",
+                category: "work",
+                images: [],
+                createdAt: "2025-07-13T04:47:45.035Z"
+            },
+            {
+                id: 1752382116528,
+                year: 2025,
+                month: 3,
+                title: "2015–2025 美國國債即期收益率曲線擬合",
+                description: "1. 使用 Bloomberg 2015–2025 年期國債平價收益率，用 Bootstrap 推導出 Spot Yield Curve\n2. 分別套用 Ho–Lee、Hull–White、Vasicek、Nelson–Siegel 以及 LSTM、Random Forest、Gradient Boosting Regression 去擬和 model 與價\n3. Nelson–Siegel Model 有最佳的穩定度與並可能可以近一步使用進行價格預測以及交易、LSTM model 展現出非常高的 Accuracy，可以進一步進行許多Cross-Validation 確定是否有無過擬和的問題",
+                category: "work",
+                images: [],
+                createdAt: "2025-07-13T04:48:36.528Z"
+            },
+            {
+                id: 1752382000001,
+                year: 2025,
+                month: 2,
+                title: "Rotman international trading competition",
+                description: "波士頓大學校內競賽第一名，代表赴多倫多參加決賽。在30多隊伍中，在Sales and trader Case中獲得全球第二名的佳績",
+                category: "personal",
+                images: [],
+                createdAt: "2025-07-13T02:22:45.654Z"
+            },
+            {
                 id: 1752382489356,
                 year: 2024,
                 month: 9,
@@ -133,6 +180,16 @@ class TimelineApp {
                 category: "education",
                 images: [],
                 createdAt: "2025-07-13T04:52:27.468Z"
+            },
+            {
+                id: 1752382630409,
+                year: 2022,
+                month: 2,
+                title: "Hanze UAS",
+                description: "Exchange student with scholarship in Hanze University of Applied Sciences | Hanze UAS, study in Brand, Design& Psychology",
+                category: "education",
+                images: [],
+                createdAt: "2025-07-13T04:57:10.409Z"
             },
             {
                 id: 1752382210876,
@@ -166,71 +223,80 @@ class TimelineApp {
             });
             
             if (response.ok) {
-                const result = await response.json();
-                console.log('數據已保存到API:', result);
+                console.log('數據已保存到 API');
+                localStorage.setItem('timelineEvents', JSON.stringify(this.events));
             } else {
-                console.error('保存到API失敗');
+                console.error('保存到 API 失敗');
             }
         } catch (error) {
-            console.error('API保存錯誤:', error);
+            console.error('API 保存錯誤:', error);
         }
-    }
-
-    openModal(event = null) {
-        this.currentEditingEvent = event;
-        this.modal.classList.add('active');
-        
-        const form = this.modal.querySelector('.event-form');
-        if (event) {
-            form.title.value = event.title || '';
-            form.year.value = event.year || new Date().getFullYear();
-            form.month.value = event.month || new Date().getMonth() + 1;
-            form.description.value = event.description || '';
-            form.category.value = event.category || 'other';
-        } else {
-            form.reset();
-            form.year.value = new Date().getFullYear();
-            form.month.value = new Date().getMonth() + 1;
-        }
-        
-        this.displayImagePreview();
     }
 
     closeModal() {
-        this.modal.classList.remove('active');
+        if (this.modal) {
+            this.modal.style.display = 'none';
+        }
         this.currentEditingEvent = null;
-        this.imagePreview.innerHTML = '';
+    }
+
+    openModal(event = null) {
+        if (!this.modal) return;
+        
+        this.modal.style.display = 'flex';
+        this.currentEditingEvent = event;
+        
+        if (event) {
+            // 編輯模式
+            document.getElementById('eventTitle').value = event.title;
+            document.getElementById('eventYear').value = event.year;
+            document.getElementById('eventMonth').value = event.month;
+            document.getElementById('eventDescription').value = event.description;
+            document.getElementById('eventCategory').value = event.category;
+        } else {
+            // 新增模式
+            if (this.eventForm) {
+                this.eventForm.reset();
+            }
+        }
     }
 
     async handleFormSubmit(e) {
         e.preventDefault();
         
-        const formData = new FormData(e.target);
-        const eventData = {
-            id: this.currentEditingEvent?.id || Date.now(),
-            title: formData.get('title'),
-            year: parseInt(formData.get('year')),
-            month: parseInt(formData.get('month')),
-            description: formData.get('description'),
-            category: formData.get('category'),
-            images: this.currentEditingEvent?.images || [],
-            createdAt: this.currentEditingEvent?.createdAt || new Date().toISOString()
-        };
-
+        const title = document.getElementById('eventTitle').value;
+        const year = parseInt(document.getElementById('eventYear').value);
+        const month = parseInt(document.getElementById('eventMonth').value);
+        const description = document.getElementById('eventDescription').value;
+        const category = document.getElementById('eventCategory').value;
+        
         if (this.currentEditingEvent) {
-            const index = this.events.findIndex(e => e.id === this.currentEditingEvent.id);
-            if (index !== -1) {
-                this.events[index] = eventData;
-            }
+            // 編輯現有事件
+            this.currentEditingEvent.title = title;
+            this.currentEditingEvent.year = year;
+            this.currentEditingEvent.month = month;
+            this.currentEditingEvent.description = description;
+            this.currentEditingEvent.category = category;
         } else {
-            this.events.push(eventData);
+            // 新增事件
+            const newEvent = {
+                id: Date.now(),
+                title,
+                year,
+                month,
+                description,
+                category,
+                images: [],
+                createdAt: new Date().toISOString()
+            };
+            this.events.push(newEvent);
         }
-
+        
         await this.saveEvents();
         this.renderTimeline();
         this.updateYearFilter();
         this.closeModal();
-        this.showToast('事件已保存!');
+        this.showToast('事件已保存！');
     }
 
     async deleteEvent(eventId) {
@@ -239,57 +305,60 @@ class TimelineApp {
             await this.saveEvents();
             this.renderTimeline();
             this.updateYearFilter();
-            this.showToast('事件已刪除!');
+            this.showToast('事件已刪除！');
         }
     }
 
     renderTimeline() {
-        const selectedYear = this.yearFilter.value;
-        const selectedCategory = this.categoryFilter.value;
+        if (!this.timelineContainer) return;
+        
+        const selectedYear = this.yearFilter ? this.yearFilter.value : 'all';
+        const selectedCategory = this.categoryFilter ? this.categoryFilter.value : 'all';
         
         let filteredEvents = this.events;
         
         if (selectedYear !== 'all') {
-            filteredEvents = filteredEvents.filter(event => event.year == selectedYear);
+            filteredEvents = filteredEvents.filter(event => event.year.toString() === selectedYear);
         }
         
         if (selectedCategory !== 'all') {
             filteredEvents = filteredEvents.filter(event => event.category === selectedCategory);
         }
         
+        // 按年份和月份排序（新到舊）
         filteredEvents.sort((a, b) => {
             if (a.year !== b.year) return b.year - a.year;
             return b.month - a.month;
         });
         
-        this.timelineContainer.innerHTML = '';
+        if (filteredEvents.length === 0) {
+            this.timelineContainer.innerHTML = '<div class="no-events">還沒有任何事件</div>';
+            return;
+        }
         
-        filteredEvents.forEach(event => {
-            const eventElement = this.createEventElement(event);
-            this.timelineContainer.appendChild(eventElement);
-        });
+        this.timelineContainer.innerHTML = filteredEvents.map(event => this.createEventElement(event)).join('');
     }
 
     createEventElement(event) {
-        const eventDiv = document.createElement('div');
-        eventDiv.className = 'timeline-event';
+        const monthNames = ['', '一月', '二月', '三月', '四月', '五月', '六月', 
+                           '七月', '八月', '九月', '十月', '十一月', '十二月'];
         
-        eventDiv.innerHTML = `
-            <div class="event-header">
-                <h3>${this.escapeHtml(event.title)}</h3>
-                <span class="event-date">${event.year}年${event.month}月</span>
-                <div class="event-actions">
-                    <button onclick="app.openModal(app.getEventById(${event.id}))" class="edit-btn">編輯</button>
-                    <button onclick="app.deleteEvent(${event.id})" class="delete-btn">刪除</button>
+        return `
+            <div class="timeline-item ${event.category}" data-id="${event.id}">
+                <div class="timeline-content">
+                    <div class="timeline-header">
+                        <h3>${this.escapeHtml(event.title)}</h3>
+                        <div class="timeline-date">${event.year}年${monthNames[event.month]}</div>
+                        <div class="timeline-category">${this.getCategoryName(event.category)}</div>
+                    </div>
+                    <p class="timeline-description">${this.escapeHtml(event.description).replace(/\n/g, '<br>')}</p>
+                    <div class="timeline-actions">
+                        <button onclick="app.openModal(app.getEventById(${event.id}))" class="edit-btn">編輯</button>
+                        <button onclick="app.deleteEvent(${event.id})" class="delete-btn">刪除</button>
+                    </div>
                 </div>
             </div>
-            <div class="event-content">
-                <p class="event-description">${this.escapeHtml(event.description || '')}</p>
-                <span class="event-category">${this.getCategoryName(event.category)}</span>
-            </div>
         `;
-        
-        return eventDiv;
     }
 
     getEventById(id) {
@@ -297,32 +366,32 @@ class TimelineApp {
     }
 
     getCategoryName(category) {
-        const categories = {
-            'work': '工作',
-            'education': '教育',
-            'personal': '個人',
-            'travel': '旅行',
-            'other': '其他'
+        const categoryNames = {
+            work: '工作',
+            education: '教育',
+            personal: '個人',
+            travel: '旅行',
+            other: '其他'
         };
-        return categories[category] || '其他';
+        return categoryNames[category] || category;
     }
 
     updateYearFilter() {
+        if (!this.yearFilter) return;
+        
         const years = [...new Set(this.events.map(event => event.year))].sort((a, b) => b - a);
         const currentValue = this.yearFilter.value;
         
-        this.yearFilter.innerHTML = '<option value="all">所有年份</option>';
-        years.forEach(year => {
-            const option = document.createElement('option');
-            option.value = year;
-            option.textContent = year + '年';
-            this.yearFilter.appendChild(option);
-        });
+        this.yearFilter.innerHTML = '<option value="all">所有年份</option>' +
+            years.map(year => `<option value="${year}">${year}年</option>`).join('');
         
-        this.yearFilter.value = currentValue;
+        if (years.includes(parseInt(currentValue))) {
+            this.yearFilter.value = currentValue;
+        }
     }
 
     showToast(message, type = 'info') {
+        // 移除現有的 toast
         const existingToast = document.querySelector('.toast');
         if (existingToast) {
             existingToast.remove();
@@ -335,35 +404,35 @@ class TimelineApp {
             position: fixed;
             top: 20px;
             right: 20px;
-            padding: 12px 24px;
-            background: #4CAF50;
+            background: ${type === 'error' ? '#e74c3c' : '#2ecc71'};
             color: white;
-            border-radius: 4px;
-            z-index: 1000;
+            padding: 12px 20px;
+            border-radius: 5px;
+            z-index: 10000;
             animation: slideIn 0.3s ease;
         `;
         
         document.body.appendChild(toast);
         
         setTimeout(() => {
-            toast.remove();
+            if (toast && toast.parentNode) {
+                toast.remove();
+            }
         }, 3000);
     }
 
     escapeHtml(text) {
-        const div = document.createElement('div');
-        div.textContent = text;
-        return div.innerHTML;
+        if (!text) return '';
+        const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
+        return text.replace(/[&<>"']/g, (m) => map[m]);
     }
 
     handleImageUpload(event) {
-        // 圖片上傳功能 - 未來可以擴展
-        console.log('圖片上傳功能將在未來實現');
+        // 圖片上傳功能預留
     }
 
     displayImagePreview() {
-        // 圖片預覽功能 - 未來可以擴展
-        this.imagePreview.innerHTML = '';
+        // 圖片預覽功能預留
     }
 
     exportDataForWebsite() {
@@ -379,22 +448,8 @@ class TimelineApp {
     }
 }
 
-// 初始化應用
-const app = new TimelineApp();
-
-// 全局變量，方便調試
-window.app = app;
-
-// 添加CSS動畫
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes slideIn {
-        from { transform: translateX(100%); opacity: 0; }
-        to { transform: translateX(0); opacity: 1; }
-    }
-    
-    .website-export-btn:hover {
-        background: #e67e22 !important;
-    }
-`;
-document.head.appendChild(style);
+// 等待DOM加載完成後初始化
+document.addEventListener('DOMContentLoaded', function() {
+    const app = new TimelineApp();
+    window.app = app;
+});
