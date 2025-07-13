@@ -262,7 +262,7 @@ class TimelineApp {
             },
             {
                 id: 1752382347468,
-                year: 2023,
+                year: 2022,
                 month: 6,
                 title: "Graduated from Soochow University",
                 description: "Business Administration 學士",
