@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lucas King 的人生時間軸 | 成長歷程與人生記錄</title>
+    <meta name="description" content="記錄 Lucas King 的人生重要時刻、成就和成長歷程。包含工作、教育、個人成長、旅行等生活各個方面的珍貴回憶。">
+    <meta name="keywords" content="人生時間軸, 個人成長, 生活記錄, Lucas King, 成長歷程">
+    <meta name="author" content="Lucas King">
+    
+    <!-- Open Graph 標籤 (用於社交媒體分享) -->
+    <meta property="og:title" content="Lucas King 的人生時間軸">
+    <meta property="og:description" content="記錄人生重要時刻、成就和成長歷程的互動式時間軸">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://[您的用戶名].github.io/[倉庫名稱]">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- 添加一些 favicon -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📈</text></svg>">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-chart-line"></i> Lucas King 的人生時間軸</h1>
+            <p class="subtitle">記錄成長歷程 • 見證人生精彩 • 分享生活故事</p>
+        </header>
+
+        <div class="controls">
+            <button id="addEventBtn" class="btn btn-primary">
+                <i class="fas fa-plus"></i> 新增事件
+            </button>
+            <div class="controls-right">
+                                    <div class="backup-controls">
+                        <button id="exportBtn" class="btn btn-secondary">
+                            <i class="fas fa-download"></i> 匯出備份
+                        </button>
+                        <label for="importFile" class="btn btn-secondary">
+                            <i class="fas fa-upload"></i> 匯入備份
+                            <input type="file" id="importFile" accept=".json" style="display: none;">
+                        </label>
+                        <button id="shareUrlBtn" class="btn btn-success">
+                            <i class="fas fa-share-alt"></i> 分享同步
+                        </button>
+                        <button id="exportForWebBtn" class="btn btn-warning">
+                            <i class="fas fa-code"></i> 網站匯出
+                        </button>
+                        <button id="cloudSyncBtn" class="btn btn-primary">
+                            <i class="fas fa-cloud"></i> 雲端同步
+                        </button>
+                    </div>
+                <div class="year-filter">
+                    <label for="yearFilter">篩選年份：</label>
+                    <select id="yearFilter">
+                        <option value="all">所有年份</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-container">
+            <div id="timeline" class="timeline"></div>
+        </div>
+
+        <div class="empty-state" id="emptyState">
+            <div class="empty-icon">
+                <i class="fas fa-calendar-alt"></i>
+            </div>
+            <h3>還沒有任何事件</h3>
+            <p>點擊「新增事件」按鈕來開始記錄你的人生軌跡</p>
+        </div>
+    </div>
+
+    <!-- 新增/編輯事件的模態框 -->
+    <div id="eventModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">新增事件</h2>
+                <button class="close-btn" id="closeModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="eventForm">
+                <div class="form-group">
+                    <label for="eventYear">年份</label>
+                    <input type="number" id="eventYear" min="1900" max="2100" required>
+                </div>
+                <div class="form-group">
+                    <label for="eventMonth">月份</label>
+                    <select id="eventMonth" required>
+                        <option value="1">1月</option>
+                        <option value="2">2月</option>
+                        <option value="3">3月</option>
+                        <option value="4">4月</option>
+                        <option value="5">5月</option>
+                        <option value="6">6月</option>
+                        <option value="7">7月</option>
+                        <option value="8">8月</option>
+                        <option value="9">9月</option>
+                        <option value="10">10月</option>
+                        <option value="11">11月</option>
+                        <option value="12">12月</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="eventTitle">事件標題</label>
+                    <input type="text" id="eventTitle" placeholder="例如：畢業、轉職、學習新技能" required>
+                </div>
+                <div class="form-group">
+                    <label for="eventDescription">詳細描述</label>
+                    <textarea id="eventDescription" rows="4" placeholder="詳細描述這個事件的內容和意義..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="eventCategory">分類</label>
+                    <select id="eventCategory">
+                        <option value="work">工作</option>
+                        <option value="education">教育</option>
+                        <option value="personal">個人成長</option>
+                        <option value="achievement">成就</option>
+                        <option value="travel">旅行</option>
+                        <option value="family">家庭</option>
+                        <option value="other">其他</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="eventImages">上傳照片</label>
+                    <div class="image-upload-container">
+                        <input type="file" id="eventImages" accept="image/*" multiple>
+                        <div class="image-upload-hint">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>點擊選擇照片或拖拽到此處</p>
+                            <small>支援 JPG、PNG、GIF 格式，建議每張小於 2MB</small>
+                        </div>
+                    </div>
+                    <div id="imagePreview" class="image-preview"></div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" id="cancelBtn" class="btn btn-secondary">取消</button>
+                    <button type="submit" class="btn btn-primary">儲存</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 圖片放大模態框 -->
+    <div id="imageModal" class="image-modal">
+        <img id="modalImage" src="" alt="放大圖片">
+    </div>
+
+    <!-- 雲端同步模態框 -->
+    <div id="cloudSyncModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>雲端同步設置</h2>
+                <button class="close-btn" id="closeSyncModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="sync-content">
+                <div class="sync-info">
+                    <i class="fas fa-cloud"></i>
+                    <h3>多設備同步</h3>
+                    <p>使用同步代碼在不同設備間同步你的時間軸數據</p>
+                </div>
+                
+                <div class="sync-section">
+                    <h4>建立新的同步</h4>
+                    <button id="createSyncBtn" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> 創建同步代碼
+                    </button>
+                    <div id="syncCode" class="sync-code" style="display: none;">
+                        <label>你的同步代碼：</label>
+                        <input type="text" id="syncCodeInput" readonly>
+                        <button id="copySyncCode" class="btn btn-secondary">
+                            <i class="fas fa-copy"></i> 複製
+                        </button>
+                    </div>
+                </div>
+
+                <div class="sync-section">
+                    <h4>加入現有同步</h4>
+                    <input type="text" id="joinSyncInput" placeholder="輸入同步代碼">
+                    <button id="joinSyncBtn" class="btn btn-primary">
+                        <i class="fas fa-link"></i> 加入同步
+                    </button>
+                </div>
+
+                <div class="sync-section">
+                    <h4>同步操作</h4>
+                    <div class="sync-actions">
+                        <button id="uploadDataBtn" class="btn btn-success" disabled>
+                            <i class="fas fa-upload"></i> 上傳我的數據
+                        </button>
+                        <button id="downloadDataBtn" class="btn btn-info" disabled>
+                            <i class="fas fa-download"></i> 下載雲端數據
+                        </button>
+                        <button id="autoSyncBtn" class="btn btn-secondary" disabled>
+                            <i class="fas fa-sync"></i> 自動同步: 關閉
+                        </button>
+                    </div>
+                </div>
+
+                <div class="sync-status" id="syncStatus">
+                    <p>尚未設置同步</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
