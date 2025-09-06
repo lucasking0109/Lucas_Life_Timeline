@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>清除快取並重新載入</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .container {
+            text-align: center;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
+        .btn {
+            display: inline-block;
+            margin: 10px;
+            padding: 15px 30px;
+            background: white;
+            color: #764ba2;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            font-size: 16px;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+        .status {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            min-height: 50px;
+        }
+        .success {
+            color: #4ade80;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔄 清除快取工具</h1>
+        <p>如果你看不到更新的內容，請使用以下按鈕清除快取</p>
+        
+        <button class="btn" onclick="clearAndReload()">
+            🗑️ 清除快取並重新載入
+        </button>
+        
+        <a href="modern-timeline.html" class="btn">
+            📊 前往新版時間軸
+        </a>
+        
+        <a href="index.html" class="btn">
+            📝 前往原版時間軸
+        </a>
+        
+        <div class="status" id="status"></div>
+    </div>
+
+    <script>
+        function clearAndReload() {
+            const statusEl = document.getElementById('status');
+            
+            // 清除所有 localStorage
+            localStorage.clear();
+            sessionStorage.clear();
+            
+            // 清除特定的時間軸資料
+            localStorage.removeItem('lucasTimelineEvents');
+            localStorage.removeItem('timelineEvents');
+            localStorage.removeItem('lucasTimelineVersion');
+            localStorage.removeItem('lucasTimelineLastSync');
+            
+            statusEl.innerHTML = '<span class="success">✅ 快取已清除！</span><br>正在重新載入...';
+            
+            // 等待一秒後重新載入
+            setTimeout(() => {
+                // 強制重新載入（繞過快取）
+                window.location.href = 'modern-timeline.html?' + Date.now();
+            }, 1500);
+        }
+        
+        // 顯示當前狀態
+        window.onload = function() {
+            const statusEl = document.getElementById('status');
+            const hasCache = localStorage.getItem('lucasTimelineEvents') || localStorage.getItem('timelineEvents');
+            
+            if (hasCache) {
+                statusEl.innerHTML = '⚠️ 偵測到快取資料，可能會影響顯示';
+            } else {
+                statusEl.innerHTML = '✨ 快取已清空，可以正常載入預設資料';
+            }
+        };
+    </script>
+</body>
+</html>

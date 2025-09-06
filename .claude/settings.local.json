@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install)",
+      "Bash(netlify:*)",
+      "Bash(npx netlify:*)",
+      "Bash(npm run dev:*)",
+      "Bash(curl:*)",
+      "Bash(npm install:*)",
+      "Bash(npx playwright install:*)",
+      "Bash(node:*)",
+      "WebFetch(domain:lucas-life-timeline.netlify.app)",
+      "Bash(cat:*)",
+      "Bash(open http://localhost:8888/modern-timeline.html)",
+      "Bash(npx playwright test:*)",
+      "Bash(npx http-server:*)",
+      "Bash(git add:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

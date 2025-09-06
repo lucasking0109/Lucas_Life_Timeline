@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lucas金的人生時間軸</title>
+    <link rel="stylesheet" href="modern-timeline.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="timeline-header">
+        <div class="header-content">
+            <div class="header-decoration left"></div>
+            <h1 class="timeline-title">
+                <span class="title-icon"><i class="fas fa-hourglass-start"></i></span>
+                <span class="title-text">TIMELINE</span>
+                <span class="title-icon"><i class="fas fa-hourglass-end"></i></span>
+            </h1>
+            <p class="timeline-subtitle">Lucas金的職業生涯與成就歷程</p>
+            <div class="header-decoration right"></div>
+        </div>
+    </header>
+
+    <!-- Control Panel -->
+    <div class="control-panel">
+        <div class="control-wrapper">
+            <button class="control-btn" id="addEventBtn">
+                <i class="fas fa-plus-circle"></i>
+                <span>新增事件</span>
+            </button>
+            <button class="control-btn" id="filterBtn">
+                <i class="fas fa-filter"></i>
+                <span>篩選</span>
+            </button>
+            <button class="control-btn" id="exportBtn">
+                <i class="fas fa-file-download"></i>
+                <span>匯出備份</span>
+            </button>
+            <button class="control-btn" id="importBtn">
+                <i class="fas fa-file-upload"></i>
+                <span>匯入備份</span>
+            </button>
+            <button class="control-btn" id="shareBtn">
+                <i class="fas fa-share-nodes"></i>
+                <span>分享</span>
+            </button>
+            <button class="control-btn" id="cloudSyncBtn">
+                <i class="fas fa-cloud"></i>
+                <span>雲端同步</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Timeline Container -->
+    <div class="timeline-container">
+        <div class="timeline-line">
+            <div class="timeline-line-gradient"></div>
+        </div>
+        
+        <!-- Timeline Items -->
+        <div class="timeline-items" id="timelineItems">
+            
+            <!-- 2025 Year Group -->
+            <div class="year-section">
+                <div class="year-marker">
+                    <span class="year-number">2025</span>
+                    <span class="year-label">現在進行中</span>
+                </div>
+                
+                <!-- 威旭實習 -->
+                <div class="timeline-item left" data-year="2025">
+                    <div class="timeline-dot">
+                        <div class="dot-core"></div>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-card">
+                            <div class="card-header">
+                                <div class="card-icon">
+                                    <i class="fas fa-briefcase"></i>
+                                </div>
+                                <div class="card-meta">
+                                    <h3 class="card-title">威旭旗下新公司 - 威顧實習</h3>
+                                    <p class="card-date">
+                                        <i class="far fa-calendar"></i> 2025年7月 - 進行中
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-description">
+                                    在參加完線上coding測驗、金融考試、主管面試、HR面試後，當場錄取在Strategy Research Lab擔任AI Data Scientists Intern
+                                </p>
+                                <ul class="card-highlights">
+                                    <li>專研應用LLM於金融領域</li>
+                                    <li>訓練agent進行量化交易</li>
+                                    <li>開發AI驅動的投資策略</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CFA Level 2 -->
+                <div class="timeline-item right" data-year="2025">
+                    <div class="timeline-dot">
+                        <div class="dot-core"></div>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-card">
+                            <div class="card-header">
+                                <div class="card-icon achievement">
+                                    <i class="fas fa-award"></i>
+                                </div>
+                                <div class="card-meta">
+                                    <h3 class="card-title">CFA Level 2 Passed</h3>
+                                    <p class="card-date">
+                                        <i class="far fa-calendar-check"></i> 2025年5月
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-description">
+                                    成功通過CFA二級考試，深化金融分析與投資組合管理專業能力
+                                </p>
+                                <ul class="card-highlights">
+                                    <li>掌握進階財務報表分析</li>
+                                    <li>精通權益與固定收益評價</li>
+                                    <li>深入理解衍生性商品定價</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2024 Year Group -->
+            <div class="year-section">
+                <div class="year-marker">
+                    <span class="year-number">2024</span>
+                    <span class="year-label">轉折點</span>
+                </div>
+                
+                <!-- 台大畢業 -->
+                <div class="timeline-item left" data-year="2024">
+                    <div class="timeline-dot">
+                        <div class="dot-core"></div>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-card">
+                            <div class="card-header">
+                                <div class="card-icon education">
+                                    <i class="fas fa-graduation-cap"></i>
+                                </div>
+                                <div class="card-meta">
+                                    <h3 class="card-title">國立臺灣大學資管系畢業</h3>
+                                    <p class="card-date">
+                                        <i class="far fa-calendar"></i> 2024年6月
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-description">
+                                    完成國立臺灣大學資訊管理學系學士學位，結合資訊科技與商業管理的跨領域專業訓練
+                                </p>
+                                <ul class="card-highlights">
+                                    <li>GPA: 3.8/4.3</li>
+                                    <li>專長：資料科學、金融科技</li>
+                                    <li>畢業專題：AI量化交易系統</li>
+                                </ul>
+                            </div>
+                            <div class="card-footer">
+                                <div class="card-tags">
+                                    <span class="tag education">教育</span>
+                                    <span class="tag milestone">里程碑</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2022-2024 Year Group -->
+            <div class="year-section">
+                <div class="year-marker">
+                    <span class="year-number">2022</span>
+                    <span class="year-label">專業成長期</span>
+                </div>
+                
+                <!-- Clear Island -->
+                <div class="timeline-item right" data-year="2022">
+                    <div class="timeline-dot">
+                        <div class="dot-core"></div>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-card">
+                            <div class="card-header">
+                                <div class="card-icon work">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <div class="card-meta">
+                                    <h3 class="card-title">Clear Island Co., Ltd.</h3>
+                                    <p class="card-date">
+                                        <i class="far fa-calendar"></i> 2022年11月 - 2024年7月
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-description">
+                                    投資分析師 / 執行交易員
+                                </p>
+                                <ul class="card-highlights">
+                                    <li>管理2000萬美元資產組合</li>
+                                    <li>開發量化交易策略，年化報酬率15%</li>
+                                    <li>執行高頻交易與風險管理</li>
+                                    <li>建立自動化交易系統</li>
+                                </ul>
+                            </div>
+                            <div class="card-footer">
+                                <div class="card-tags">
+                                    <span class="tag work">工作</span>
+                                    <span class="tag finance">投資管理</span>
+                                    <span class="tag tech">量化交易</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2020-2021 Year Group -->
+            <div class="year-section">
+                <div class="year-marker">
+                    <span class="year-number">2020</span>
+                    <span class="year-label">起步階段</span>
+                </div>
+                
+                <!-- 群益期貨 -->
+                <div class="timeline-item left" data-year="2020">
+                    <div class="timeline-dot">
+                        <div class="dot-core"></div>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-card">
+                            <div class="card-header">
+                                <div class="card-icon internship">
+                                    <i class="fas fa-university"></i>
+                                </div>
+                                <div class="card-meta">
+                                    <h3 class="card-title">群益期貨槓桿交易部</h3>
+                                    <p class="card-date">
+                                        <i class="far fa-calendar"></i> 2020年9月 - 2021年5月
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-description">
+                                    交易員實習生
+                                </p>
+                                <ul class="card-highlights">
+                                    <li>MT5平台建構交易策略</li>
+                                    <li>投資組合優化與回測分析</li>
+                                    <li>協助客戶執行交易指令</li>
+                                    <li>市場研究與數據分析</li>
+                                </ul>
+                            </div>
+                            <div class="card-footer">
+                                <div class="card-tags">
+                                    <span class="tag internship">實習</span>
+                                    <span class="tag finance">期貨交易</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Timeline End Marker -->
+            <div class="timeline-end">
+                <div class="end-marker">
+                    <i class="fas fa-flag-checkered"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Event Modal -->
+    <div class="modal" id="addEventModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-plus-circle"></i> 新增時間軸事件</h2>
+                <button class="close-btn" aria-label="關閉">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="addEventForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="eventTitle">
+                                <i class="fas fa-heading"></i> 事件標題
+                            </label>
+                            <input type="text" id="eventTitle" required placeholder="輸入事件標題">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="eventYear">
+                                <i class="fas fa-calendar-alt"></i> 年份
+                            </label>
+                            <input type="number" id="eventYear" min="1990" max="2030" required placeholder="2025">
+                        </div>
+                        <div class="form-group">
+                            <label for="eventMonth">
+                                <i class="fas fa-calendar-day"></i> 月份
+                            </label>
+                            <select id="eventMonth">
+                                <option value="1">一月</option>
+                                <option value="2">二月</option>
+                                <option value="3">三月</option>
+                                <option value="4">四月</option>
+                                <option value="5">五月</option>
+                                <option value="6">六月</option>
+                                <option value="7">七月</option>
+                                <option value="8">八月</option>
+                                <option value="9">九月</option>
+                                <option value="10">十月</option>
+                                <option value="11">十一月</option>
+                                <option value="12">十二月</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="eventDescription">
+                            <i class="fas fa-align-left"></i> 事件描述
+                        </label>
+                        <textarea id="eventDescription" rows="4" required placeholder="詳細描述這個事件..."></textarea>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="eventCategory">
+                                <i class="fas fa-tag"></i> 類別
+                            </label>
+                            <select id="eventCategory">
+                                <option value="work">工作經歷</option>
+                                <option value="education">教育學習</option>
+                                <option value="achievement">個人成就</option>
+                                <option value="certification">專業證照</option>
+                                <option value="project">專案項目</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="eventIcon">
+                                <i class="fas fa-icons"></i> 圖標
+                            </label>
+                            <select id="eventIcon">
+                                <option value="briefcase">💼 工作</option>
+                                <option value="graduation-cap">🎓 教育</option>
+                                <option value="award">🏆 成就</option>
+                                <option value="certificate">📜 證照</option>
+                                <option value="chart-line">📈 投資</option>
+                                <option value="code">💻 程式</option>
+                                <option value="project-diagram">📊 專案</option>
+                                <option value="star">⭐ 特殊</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" id="cancelBtn">
+                            <i class="fas fa-times"></i> 取消
+                        </button>
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-save"></i> 新增事件
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Import Modal -->
+    <div class="modal" id="importModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-file-upload"></i> 匯入時間軸備份</h2>
+                <button class="close-btn" aria-label="關閉">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="import-area">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <p>拖曳檔案到此處或點擊選擇檔案</p>
+                    <input type="file" id="importFile" accept=".json">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="timeline-footer" style="display: none;">
+    </footer>
+
+    <script src="modern-timeline.js"></script>
+</body>
+</html>
