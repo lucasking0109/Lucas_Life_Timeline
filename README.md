@@ -1,82 +1,82 @@
 # Lucas King's Life Timeline
 
-一個動態的個人時間軸網站，用於展示人生重要時刻和里程碑。
+A dynamic personal timeline website showcasing important life moments and milestones.
 
-## 🌟 功能特色
+## 🌟 Features
 
-- **動態內容管理**：隨時添加、編輯或刪除時間軸事件
-- **圖片上傳**：支持為事件添加圖片
-- **分類篩選**：按類別（工作、教育、個人等）篩選事件
-- **年份篩選**：按年份查看特定時期的事件
-- **響應式設計**：適配各種設備尺寸
-- **實時同步**：基於Netlify的無服務器架構
+- **Dynamic Content Management**: Add, edit, or delete timeline events anytime
+- **Image Upload**: Support for adding images to events
+- **Category Filtering**: Filter events by category (work, education, personal, etc.)
+- **Year Filtering**: View events from specific periods by year
+- **Responsive Design**: Adapts to various device sizes
+- **Real-time Sync**: Serverless architecture based on Netlify
 
-## 🚀 技術棧
+## 🚀 Tech Stack
 
-- **前端**：HTML5, CSS3, JavaScript (ES6+)
-- **後端**：Netlify Functions (Node.js)
-- **部署**：Netlify
-- **存儲**：Netlify KV Store (計劃中)
+- **Frontend**: HTML5, CSS3, JavaScript (ES6+)
+- **Backend**: Netlify Functions (Node.js)
+- **Deployment**: Netlify
+- **Storage**: Netlify KV Store (planned)
 
-## 📦 部署說明
+## 📦 Deployment Instructions
 
-### 前置要求
+### Prerequisites
 - Node.js 18+
-- npm 或 yarn
+- npm or yarn
 - Netlify CLI
 
-### 本地開發
+### Local Development
 
-1. 克隆項目：
+1. Clone the project:
 ```bash
 git clone [your-repo-url]
 cd lucas-life-timeline
 ```
 
-2. 安裝依賴：
+2. Install dependencies:
 ```bash
 npm install
 ```
 
-3. 啟動本地開發服務器：
+3. Start local development server:
 ```bash
 npm run dev
 ```
 
-### 部署到Netlify
+### Deploy to Netlify
 
-1. 安裝Netlify CLI：
+1. Install Netlify CLI:
 ```bash
 npm install -g netlify-cli
 ```
 
-2. 登錄Netlify：
+2. Login to Netlify:
 ```bash
 netlify login
 ```
 
-3. 部署到Netlify：
+3. Deploy to Netlify:
 ```bash
 npm run deploy:prod
 ```
 
-## 🎯 如何使用
+## 🎯 How to Use
 
-1. **添加事件**：點擊"添加事件"按鈕，填寫事件詳情
-2. **編輯事件**：點擊事件上的"編輯"按鈕
-3. **刪除事件**：點擊事件上的"刪除"按鈕
-4. **篩選事件**：使用頂部的年份和類別篩選器
-5. **導出數據**：點擊"Website Export"按鈕導出數據
+1. **Add Event**: Click "Add Event" button and fill in event details
+2. **Edit Event**: Click the "Edit" button on an event
+3. **Delete Event**: Click the "Delete" button on an event
+4. **Filter Events**: Use the year and category filters at the top
+5. **Export Data**: Click "Website Export" button to export data
 
-## 📁 項目結構
+## 📁 Project Structure
 
 ```
 lucas-life-timeline/
-├── index.html          # 主頁面
-├── styles.css          # 樣式文件
-├── script.js           # 前端邏輯
-├── netlify.toml        # Netlify配置
-├── package.json        # 項目配置
+├── index.html          # Main page
+├── styles.css          # Stylesheet
+├── script.js           # Frontend logic
+├── netlify.toml        # Netlify configuration
+├── package.json        # Project configuration
 └── netlify/
     └── functions/      # Netlify Functions
         ├── get-timeline.js
@@ -84,24 +84,24 @@ lucas-life-timeline/
         └── upload-image.js
 ```
 
-## 🔧 API 端點
+## 🔧 API Endpoints
 
-- `GET /.netlify/functions/get-timeline` - 獲取時間軸數據
-- `POST /.netlify/functions/save-timeline` - 保存時間軸數據
-- `POST /.netlify/functions/upload-image` - 上傳圖片
+- `GET /.netlify/functions/get-timeline` - Get timeline data
+- `POST /.netlify/functions/save-timeline` - Save timeline data
+- `POST /.netlify/functions/upload-image` - Upload image
 
-## 🎨 自定義
+## 🎨 Customization
 
-您可以通過修改 `styles.css` 來自定義網站的外觀和感覺。
+You can customize the website's look and feel by modifying `styles.css`.
 
-## 📝 許可證
+## 📝 License
 
 MIT License
 
-## 👤 作者
+## 👤 Author
 
 Lucas King
 
 ---
 
-*這個項目使用 AI 輔助開發，展示了現代 Web 開發的無限可能性。* 
+*This project was developed with AI assistance, showcasing the endless possibilities of modern web development.* 

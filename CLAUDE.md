@@ -1,69 +1,69 @@
-# Lucas金的人生時間軸 - 專案說明文件
+# Lucas King's Life Timeline - Project Documentation
 
-## 專案概述
-這是一個個人生涯時間軸展示網站，用於記錄和展示Lucas金的職業生涯、教育背景、成就和重要人生事件。
+## Project Overview
+This is a personal career timeline showcase website, designed to record and display Lucas King's career, educational background, achievements, and important life events.
 
-## 專案結構
-- **前端**: 純靜態HTML/CSS/JavaScript
-  - `index.html` - 主頁面
-  - `styles.css` - 樣式檔案
-  - `script.js` - 主要JavaScript邏輯
-  - `images/` - 圖片資源目錄
+## Project Structure
+- **Frontend**: Pure static HTML/CSS/JavaScript
+  - `index.html` - Main page
+  - `styles.css` - Stylesheet
+  - `script.js` - Main JavaScript logic
+  - `images/` - Image resources directory
 
-- **後端**: Netlify Serverless Functions
-  - `netlify/functions/get-timeline.js` - 獲取時間軸數據
-  - `netlify/functions/save-timeline.js` - 保存時間軸數據
-  - `netlify/functions/save-timeline-persistent.js` - 持久化保存
-  - `netlify/functions/upload-image.js` - 圖片上傳
-  - `netlify/functions/upload-image-cloudinary.js` - Cloudinary圖片上傳
+- **Backend**: Netlify Serverless Functions
+  - `netlify/functions/get-timeline.js` - Get timeline data
+  - `netlify/functions/save-timeline.js` - Save timeline data
+  - `netlify/functions/save-timeline-persistent.js` - Persistent storage
+  - `netlify/functions/upload-image.js` - Image upload
+  - `netlify/functions/upload-image-cloudinary.js` - Cloudinary image upload
 
-## 部署平台
-- **Netlify** - 靜態網站託管 + Serverless Functions
-- 配置文件: `netlify.toml`
+## Deployment Platform
+- **Netlify** - Static website hosting + Serverless Functions
+- Configuration file: `netlify.toml`
 
-## 主要功能
-1. 📅 時間軸展示 - 按年份展示人生重要事件
-2. ➕ 新增事件 - 動態添加新的時間軸事件
-3. 📤 匯出備份 - 將時間軸數據匯出為JSON
-4. 📥 匯入備份 - 從JSON檔案恢復時間軸
-5. 🔗 分享同步 - 分享時間軸連結
-6. 🖼️ 網站匯出 - 將時間軸匯出為圖片或PDF
-7. ☁️ 雲端同步 - 自動保存數據到雲端
-8. 📊 篩選功能 - 按年份或類別篩選事件
+## Main Features
+1. 📅 Timeline Display - Display important life events by year
+2. ➕ Add Events - Dynamically add new timeline events
+3. 📤 Export Backup - Export timeline data as JSON
+4. 📥 Import Backup - Restore timeline from JSON file
+5. 🔗 Share & Sync - Share timeline link
+6. 🖼️ Website Export - Export timeline as image or PDF
+7. ☁️ Cloud Sync - Automatically save data to cloud
+8. 📊 Filter Function - Filter events by year or category
 
-## 開發指令
+## Development Commands
 ```bash
-# 安裝依賴
+# Install dependencies
 npm install
 
-# 本地開發（啟動 Netlify Dev Server）
+# Local development (Start Netlify Dev Server)
 npm run dev
 
-# 部署到 Netlify（預覽）
+# Deploy to Netlify (Preview)
 npm run deploy
 
-# 部署到生產環境
+# Deploy to production
 npm run deploy:prod
 ```
 
-## 本地開發
-1. 執行 `npm run dev` 啟動本地開發伺服器
-2. 瀏覽器訪問 http://localhost:8888
-3. 修改檔案會自動重新載入
+## Local Development
+1. Run `npm run dev` to start local development server
+2. Access http://localhost:8888 in browser
+3. File changes will auto-reload
 
-## 注意事項
-- Node.js 版本需求: >= 18.0.0
-- 使用 Cloudinary 進行圖片上傳（需要配置 API 金鑰）
-- 所有 API 端點都通過 `/api/*` 路徑訪問
+## Important Notes
+- Node.js version requirement: >= 18.0.0
+- Uses Cloudinary for image uploads (requires API key configuration)
+- All API endpoints are accessed via `/api/*` path
 
-## 環境變數
-如需使用圖片上傳功能，需在 Netlify 後台設置以下環境變數：
+## Environment Variables
+To use image upload functionality, set the following environment variables in Netlify dashboard:
 - `CLOUDINARY_CLOUD_NAME`
 - `CLOUDINARY_API_KEY`
 - `CLOUDINARY_API_SECRET`
 
-## 技術棧
-- 前端：原生 HTML/CSS/JavaScript
-- 後端：Node.js + Netlify Functions
-- 部署：Netlify
-- 圖片存儲：Cloudinary（可選）
+## Tech Stack
+- Frontend: Native HTML/CSS/JavaScript
+- Backend: Node.js + Netlify Functions
+- Deployment: Netlify
+- Image Storage: Cloudinary (optional)

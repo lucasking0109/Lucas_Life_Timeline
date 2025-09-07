@@ -1,139 +1,139 @@
-# 🚀 Netlify 部署指南
+# 🚀 Netlify Deployment Guide
 
-## 📋 完成清單
+## 📋 Checklist
 
-這個指南將幫助您將動態時間軸網站部署到Netlify。
+This guide will help you deploy your dynamic timeline website to Netlify.
 
-### ✅ 已完成的設置
+### ✅ Completed Setup
 
-我已經為您準備了以下文件和配置：
+I have prepared the following files and configurations for you:
 
-1. **📁 項目結構**
-   - `netlify.toml` - Netlify配置文件
-   - `package.json` - 項目依賴管理
-   - `netlify/functions/` - 無服務器函數
+1. **📁 Project Structure**
+   - `netlify.toml` - Netlify configuration file
+   - `package.json` - Project dependency management
+   - `netlify/functions/` - Serverless functions
 
-2. **🔧 API 端點**
-   - `get-timeline.js` - 獲取時間軸數據
-   - `save-timeline.js` - 保存時間軸數據
-   - `upload-image.js` - 基本圖片上傳
-   - `upload-image-cloudinary.js` - 進階圖片上傳(使用Cloudinary)
+2. **🔧 API Endpoints**
+   - `get-timeline.js` - Get timeline data
+   - `save-timeline.js` - Save timeline data
+   - `upload-image.js` - Basic image upload
+   - `upload-image-cloudinary.js` - Advanced image upload (using Cloudinary)
 
-3. **💻 前端更新**
-   - 重新設計的`script.js`，支持API調用
-   - 自動檢測環境（本地vs生產）
-   - 新增"Website Export"按鈕
+3. **💻 Frontend Updates**
+   - Redesigned `script.js` with API call support
+   - Automatic environment detection (local vs production)
+   - Added "Website Export" button
 
-## 🎯 您需要執行的步驟
+## 🎯 Steps You Need to Execute
 
-### 步驟1：準備Git倉庫
+### Step 1: Prepare Git Repository
 
-1. 確保您的項目已經推送到GitHub：
+1. Ensure your project is pushed to GitHub:
 ```bash
 git add .
 git commit -m "Add Netlify configuration and API functions"
 git push origin main
 ```
 
-### 步驟2：註冊並登錄Netlify
+### Step 2: Register and Login to Netlify
 
-1. 前往 [netlify.com](https://netlify.com) 註冊帳戶
-2. 使用GitHub帳戶登錄
+1. Go to [netlify.com](https://netlify.com) to register an account
+2. Login with your GitHub account
 
-### 步驟3：部署網站
+### Step 3: Deploy Website
 
-1. 在Netlify儀表板中，點擊"New site from Git"
-2. 選擇GitHub並連接您的倉庫
-3. 選擇您的時間軸項目倉庫
-4. 配置部署設置：
-   - **Build command**: `npm run build` （或留空）
-   - **Publish directory**: `.` （當前目錄）
+1. In the Netlify dashboard, click "New site from Git"
+2. Select GitHub and connect your repository
+3. Select your timeline project repository
+4. Configure deployment settings:
+   - **Build command**: `npm run build` (or leave empty)
+   - **Publish directory**: `.` (current directory)
    - **Functions directory**: `netlify/functions`
 
-### 步驟4：配置環境變量（如果使用Cloudinary）
+### Step 4: Configure Environment Variables (If Using Cloudinary)
 
-如果您想要使用圖片上傳功能，需要設置以下環境變量：
+If you want to use the image upload feature, you need to set the following environment variables:
 
-1. 在Netlify儀表板中，進入您的網站設置
-2. 點擊"Environment variables"
-3. 添加以下變量：
-   - `CLOUDINARY_CLOUD_NAME`: 您的Cloudinary雲名稱
-   - `CLOUDINARY_API_KEY`: 您的Cloudinary API Key
-   - `CLOUDINARY_API_SECRET`: 您的Cloudinary API Secret
+1. In the Netlify dashboard, go to your site settings
+2. Click "Environment variables"
+3. Add the following variables:
+   - `CLOUDINARY_CLOUD_NAME`: Your Cloudinary cloud name
+   - `CLOUDINARY_API_KEY`: Your Cloudinary API Key
+   - `CLOUDINARY_API_SECRET`: Your Cloudinary API Secret
 
-### 步驟5：測試網站
+### Step 5: Test Website
 
-1. 部署完成後，Netlify會提供一個URL
-2. 訪問您的網站並測試功能：
-   - 查看現有的時間軸事件
-   - 嘗試添加新事件
-   - 測試編輯和刪除功能
+1. After deployment is complete, Netlify will provide a URL
+2. Visit your website and test the features:
+   - View existing timeline events
+   - Try adding new events
+   - Test edit and delete functions
 
-## 🔧 進階配置
+## 🔧 Advanced Configuration
 
-### 自定義域名
+### Custom Domain
 
-1. 在Netlify儀表板中，進入"Domain settings"
-2. 點擊"Add custom domain"
-3. 輸入您的域名並按照指示配置DNS
+1. In the Netlify dashboard, go to "Domain settings"
+2. Click "Add custom domain"
+3. Enter your domain name and follow the instructions to configure DNS
 
-### 啟用表單處理
+### Enable Form Processing
 
-Netlify提供內建的表單處理功能，可以用於聯繫表單等。
+Netlify provides built-in form processing functionality that can be used for contact forms, etc.
 
-### 設置重定向
+### Setup Redirects
 
-已在`netlify.toml`中配置了API重定向規則。
+API redirect rules have been configured in `netlify.toml`.
 
-## 🎨 自定義您的網站
+## 🎨 Customize Your Website
 
-### 修改內容
+### Modify Content
 
-1. 更新`index.html`中的標題和描述
-2. 修改`styles.css`來改變外觀
-3. 在`script.js`中的`getDefaultData()`方法中更新您的真實數據
+1. Update title and description in `index.html`
+2. Modify `styles.css` to change appearance
+3. Update your real data in the `getDefaultData()` method in `script.js`
 
-### 添加更多功能
+### Add More Features
 
-您可以擴展現有功能：
-- 添加搜索功能
-- 實現用戶認證
-- 添加評論系統
-- 集成社交媒體分享
+You can extend existing features:
+- Add search functionality
+- Implement user authentication
+- Add comment system
+- Integrate social media sharing
 
-## 🛠️ 故障排除
+## 🛠️ Troubleshooting
 
-### 常見問題
+### Common Issues
 
-1. **函數無法正常工作**
-   - 檢查`netlify.toml`配置是否正確
-   - 確認函數代碼沒有語法錯誤
-   - 查看Netlify的函數日誌
+1. **Functions not working properly**
+   - Check if `netlify.toml` configuration is correct
+   - Confirm function code has no syntax errors
+   - View Netlify function logs
 
-2. **圖片上傳失敗**
-   - 確認Cloudinary環境變量設置正確
-   - 檢查圖片大小是否超過限制
+2. **Image upload fails**
+   - Confirm Cloudinary environment variables are set correctly
+   - Check if image size exceeds limits
 
-3. **數據不持久化**
-   - 目前使用的是臨時存儲，可以考慮集成數據庫服務
+3. **Data not persisting**
+   - Currently using temporary storage, consider integrating database service
 
-### 獲取幫助
+### Get Help
 
-- 查看Netlify文檔：[docs.netlify.com](https://docs.netlify.com)
-- 檢查函數日誌：Netlify儀表板 > Functions > View logs
-- 聯繫支援：通過GitHub issues或其他方式
+- View Netlify documentation: [docs.netlify.com](https://docs.netlify.com)
+- Check function logs: Netlify dashboard > Functions > View logs
+- Contact support: Via GitHub issues or other means
 
-## 🎉 恭喜！
+## 🎉 Congratulations!
 
-完成以上步驟後，您就擁有了一個功能完整的動態時間軸網站！
+After completing the above steps, you will have a fully functional dynamic timeline website!
 
-### 後續維護
+### Ongoing Maintenance
 
-- 定期備份您的數據
-- 監控網站性能
-- 根據需要更新功能
-- 與朋友和家人分享您的時間軸
+- Regularly backup your data
+- Monitor website performance
+- Update features as needed
+- Share your timeline with friends and family
 
 ---
 
-*如果您在部署過程中遇到任何問題，請隨時聯繫我！* 
+*If you encounter any issues during deployment, please feel free to contact me!* 
