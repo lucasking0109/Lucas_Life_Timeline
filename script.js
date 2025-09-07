@@ -34,7 +34,6 @@ class TimelineApp {
         this.singleTimeInputs = document.getElementById('singleTimeInputs');
         this.timeRangeInputs = document.getElementById('timeRangeInputs');
         
-        this.createWebsiteExportBtn();
     }
 
     bindEvents() {
@@ -96,29 +95,6 @@ class TimelineApp {
         }
     }
 
-    createWebsiteExportBtn() {
-        const exportBtn = document.createElement('button');
-        exportBtn.textContent = '📋 複製數據';
-        exportBtn.className = 'website-export-btn';
-        exportBtn.style.cssText = `
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #f39c12;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: bold;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            z-index: 1000;
-            transition: all 0.3s ease;
-        `;
-        exportBtn.addEventListener('click', () => this.exportDataForWebsite());
-        document.body.appendChild(exportBtn);
-    }
 
     async loadEvents() {
         // 首先嘗試從localStorage載入
@@ -539,10 +515,6 @@ class TimelineApp {
                             <h3>${this.escapeHtml(event.title)}</h3>
                             <div class="timeline-date">${dateDisplay}</div>
                             <div class="timeline-category">${this.getCategoryName(event.category)}</div>
-                        </div>
-                        <div class="timeline-actions">
-                            <button onclick="app.openModal(app.getEventById(${event.id}))" class="edit-btn">編輯</button>
-                            <button onclick="app.deleteEvent(${event.id})" class="delete-btn">刪除</button>
                         </div>
                     </div>
                     <p class="timeline-description">${this.escapeHtml(event.description).replace(/\n/g, '<br>')}</p>

@@ -14,7 +14,9 @@
       "Bash(open http://localhost:8888/modern-timeline.html)",
       "Bash(npx playwright test:*)",
       "Bash(npx http-server:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git push:*)",
+      "Bash(open http://localhost:8888/index.html)"
     ],
     "deny": [],
     "ask": []
