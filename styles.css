@@ -300,11 +300,24 @@ header h1 i {
 
 .timeline-description {
     color: #555;
-    line-height: 1.6;
+    line-height: 1.8;
     margin-bottom: 1rem;
     white-space: pre-wrap;
     word-wrap: break-word;
     word-break: break-word;
+    font-size: 0.95rem;
+}
+
+/* 修改描述中的項目符號樣式 */
+.timeline-description {
+    padding-left: 0;
+}
+
+/* 讓項目點之間有更好的間距 */
+.timeline-description br {
+    margin-bottom: 0.5rem;
+    display: block;
+    content: "";
 }
 
 .timeline-actions {

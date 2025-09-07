@@ -144,7 +144,7 @@ class TimelineApp {
                 year: 2022, // 用於排序
                 month: 11,
                 title: "Clear Island Co., Ltd. - Investment Analyst/Execution Trader",
-                description: "• Conducted rolling linear regression analysis on U.S. and Taiwanese markets, uncovering structural differences in trend consistency that informed cross-market asset allocation strategies.\n\n• Designed and implemented a Python-based business-cycle timing model to identify optimal entry points. Backtests demonstrated an 81%+ win rate in low-EPS technology sectors during pre-expansions, with maximum drawdowns of 24% and annualized returns exceeding 33% over a five-year period.\n\n• Developed a dynamic VaR estimation system by integrating historical performance analysis and 20-day rolling volatility metrics in Python. Leveraged Monte Carlo simulation results to conduct weekly portfolio reviews and tactical reallocations, ensuring adherence to predefined risk tolerance levels.\n\n• Managed a US$350,000 AUM portfolio in the U.S. market from December 2022 to July 2024, delivering a 164.12% (Annualized: 88.87%) cumulative time-weighted return with a maximum drawdown of 17%. (SPY: Annualized: 11.5% Max Drawdown: 12%, NASDAQ: Annualized: 20.3% Max Drawdown 25%)",
+                description: "• Built a business cycle timing model yielding an 81%-win rate in low-EPS tech during pre-expansions, with 33% annualized returns and 24% max drawdown over five years.\n• Developed a dynamic VaR system by integrating historical drawdowns with rolling 20-day volatility to enhance real-time risk assessment.\n• Managed a US$350,000 AUM portfolio in the U.S. market from December 2022 to July 2024",
                 category: "work",
                 images: [],
                 createdAt: "2025-01-18T10:00:00.000Z"
@@ -153,8 +153,8 @@ class TimelineApp {
                 id: 1752383058032,
                 year: 2025,
                 month: 7,
-                title: "威旭旗下新公司--威鯨 實習",
-                description: "在參加完線上coding測驗+金融考試+主管面試+HR面試後，當場錄取在Strategy Research Lab當任AI Data Scientists Intern，專研應用LLM 以及訓練agent進行量化交易",
+                title: "Vici Holdings - AI Data Scientist Intern",
+                description: "Conducted AI trading strategy research at Vici Holdings FIC Department's Strategy Research Lab.\n• Applied LLMs to extract and quantify indicators of management quality from U.S. 10-K filings and assessed their relationship with long-term stock performance using permutation tests.\n• Developed a multi-agent LLM system that surfaces impactful news, maps scenario paths, and generates trading suggestions based on M&A valuation and short interest/margin activity.\n• Analyzed trading opportunities in preferred stocks, specifically focusing on conversion terms and interest rate resets in merger and acquisition scenarios between companies.",
                 category: "work",
                 images: [],
                 createdAt: "2025-07-13T05:30:58.032Z"
@@ -173,8 +173,8 @@ class TimelineApp {
                 id: 1752383058034,
                 year: 2025,
                 month: 5,
-                title: "利用 NLP 自動辨識 Mutual Fund Prospectus 的投資風格",
-                description: "1. 資料預處理、分詞 2. 用 Skip-gram Word2Vec 生成專屬詞向量 3. 建立 Knowledge Base 計算文件向量與風格中心的餘弦距離作為額外特徵 4. 基於特徵及向量進行分類，使用 Regression, Random Forest, XGBoost 5. 在 test data 上進行評估，最終達成可以自動辨識基金風格的系統，最終在 test data 上 XGBoost 分類模型達到 66% 的 Accuracy",
+                title: "Automated Investment Style Classification for Mutual Fund Prospectuses Using NLP",
+                description: "1. Data preprocessing and tokenization 2. Generated domain-specific word embeddings using Skip-gram Word2Vec 3. Built Knowledge Base to calculate cosine distance between document vectors and style centroids as additional features 4. Performed classification based on features and vectors using Regression, Random Forest, and XGBoost 5. Evaluated on test data, achieving an automated fund style classification system with 66% accuracy using XGBoost",
                 category: "work",
                 images: [],
                 createdAt: "2025-07-13T05:30:58.034Z"
@@ -184,7 +184,7 @@ class TimelineApp {
                 year: 2025,
                 month: 4,
                 title: "Kaggle Competition: Company Bankruptcy Prediction",
-                description: "1. 資料預處理: 用 StandardScaler 對所有特徵標準化，針對「破產」與「未破產」兩類資料極度不均衡，於每個交叉驗證折內使用 SMOTE 進行過採樣 2. 建立 Pipeline 串接 StandardScaler → SMOTE → 分類器，保證 resampling 僅發生在訓練階段，避免資料外洩互相污染 3. 嘗試多種分類演算法:Random Forest、Support Vector Machine (SVM)、XGBoost，以 F1 score 作為主要優化指標進行最佳化 4. 交叉驗證調校：在每個 CV 折內計算佳參數，Random Forest 與 XGBoost 於驗證集上均能取得約 0.50 左右的 F1 score 5. XGBoost 模型在測試集達到 0.46 的 F1 score，展現 PR97 的 model 穩定度",
+                description: "1. Data preprocessing: Applied StandardScaler for feature normalization; addressed extreme class imbalance between 'bankrupt' and 'non-bankrupt' using SMOTE oversampling within each cross-validation fold 2. Built Pipeline connecting StandardScaler → SMOTE → Classifier, ensuring resampling occurred only during training phase to prevent data leakage 3. Tested multiple classification algorithms: Random Forest, Support Vector Machine (SVM), XGBoost, optimizing for F1 score as primary metric 4. Cross-validation tuning: Calculated optimal parameters within each CV fold; both Random Forest and XGBoost achieved ~0.50 F1 score on validation set 5. XGBoost model achieved 0.46 F1 score on test set, demonstrating PR97 model stability",
                 category: "work",
                 images: [],
                 createdAt: "2025-07-13T05:30:58.035Z"
@@ -194,7 +194,7 @@ class TimelineApp {
                 year: 2025,
                 month: 3,
                 title: "IMC Prosperity 3",
-                description: "獲得全球 top 1% 名次，台灣第一名 (第 133 名/總共 12621 隊伍)",
+                description: "Achieved global top 1% ranking, Taiwan #1 (133rd place out of 12,621 teams)",
                 category: "personal",
                 images: [],
                 createdAt: "2025-07-13T05:30:58.036Z"
@@ -204,7 +204,7 @@ class TimelineApp {
                 year: 2025,
                 month: 4,
                 title: "Big Data Cleaning and Application",
-                description: "1. 使用 Pyspark 處理來自 Polygon.io 的 400 多隻股票 2023/05-2025/05 的分鐘級別資料，改為 Parquet 格式方便快速處理\n\n2. 發現商品異常值並計算 VWAP，並比較 data 與其他資料來源的差異性\n\n3. 對資料進行回歸分析、證實報酬率不符合常態分佈、分析絕大部分股票交易量主要集中於每日收盤前半小時、使用 ACF 分析大部分報酬率不具有滯後性",
+                description: "1. Processed 400+ stocks' 1-minute price data from Polygon.io (May 2023 - May 2025) using PySpark, converting to Parquet format for efficient processing\n\n2. Identified stock price anomalies in Polygon.io data by calculating VWAP and comparing statistical values across different data sources\n\n3. Conducted regression analysis proving returns don't follow normal distribution; analyzed that most stock trading volume concentrates in the last 30 minutes before market close; used ACF analysis to demonstrate most returns lack autocorrelation",
                 category: "work",
                 images: [],
                 createdAt: "2025-07-13T04:47:45.035Z"
@@ -213,8 +213,8 @@ class TimelineApp {
                 id: 1752382116528,
                 year: 2025,
                 month: 3,
-                title: "2015–2025 美國國債即期收益率曲線擬合",
-                description: "1. 使用 Bloomberg 2015–2025 年期國債平價收益率，用 Bootstrap 推導出 Spot Yield Curve\n2. 分別套用 Ho–Lee、Hull–White、Vasicek、Nelson–Siegel 以及 LSTM、Random Forest、Gradient Boosting Regression 去擬和 model 與價\n3. Nelson–Siegel Model 有最佳的穩定度與並可能可以近一步使用進行價格預測以及交易、LSTM model 展現出非常高的 Accuracy，可以進一步進行許多Cross-Validation 確定是否有無過擬和的問題",
+                title: "U.S. Treasury Spot Yield Curve Fitting (2015-2025)",
+                description: "1. Used Bloomberg 2015-2025 Treasury par yield rates, deriving Spot Yield Curve through Bootstrap method\n2. Applied Ho-Lee, Hull-White, Vasicek, Nelson-Siegel models, as well as LSTM, Random Forest, and Gradient Boosting Regression for model fitting and pricing\n3. Nelson-Siegel Model showed optimal stability with potential for price prediction and trading; LSTM model demonstrated very high accuracy, requiring further cross-validation to verify absence of overfitting",
                 category: "work",
                 images: [],
                 createdAt: "2025-07-13T04:48:36.528Z"
@@ -223,8 +223,8 @@ class TimelineApp {
                 id: 1752382000001,
                 year: 2025,
                 month: 2,
-                title: "Rotman international trading competition",
-                description: "波士頓大學校內競賽第一名，代表赴多倫多參加決賽。在30多隊伍中，在Sales and trader Case中獲得全球第二名的佳績",
+                title: "Rotman International Trading Competition",
+                description: "Led team to 1st place in the MSMFT internal competition: advanced to global finals by coordinating strategies and ensuring alignment across team members under real-time trading pressure.\n• Focused on relative value and tender-offer-driven opportunities, systematically capturing arbitrage from structural and team-driven market mechanisms instead of relying on directional bets.\n• Achieved 2nd place globally in the Sales & Trader Case among 35 teams, showcasing strong teamwork, disciplined execution, and effective risk management.",
                 category: "personal",
                 images: [],
                 createdAt: "2025-07-13T02:22:45.654Z"
@@ -254,7 +254,7 @@ class TimelineApp {
                 year: 2022,
                 month: 6,
                 title: "Graduated from Soochow University",
-                description: "Business Administration 學士",
+                description: "Bachelor of Business Administration",
                 category: "education",
                 images: [],
                 createdAt: "2025-07-13T04:52:27.468Z"
@@ -268,7 +268,7 @@ class TimelineApp {
                 year: 2022, // 用於排序
                 month: 2,
                 title: "Hanze UAS",
-                description: "Exchange student with scholarship in Hanze University of Applied Sciences | Hanze UAS, study in Brand, Design& Psychology",
+                description: "Exchange student with scholarship at Hanze University of Applied Sciences | Hanze UAS, studying Brand, Design & Psychology",
                 category: "education",
                 images: [],
                 createdAt: "2025-07-13T04:57:10.409Z"
@@ -281,8 +281,8 @@ class TimelineApp {
                 endMonth: 5,
                 year: 2020, // 用於排序
                 month: 9,
-                title: "群益期貨槓桿交易部--交易員實習生--MT5建構交易策略及投資組合",
-                description: "1. 蒐集、匯入資料\n2. 交易策略概念發想，使用 MQL5 語言撰寫策略，主要以價格變動當作參考對象，使用技術指標，包括跨週期策略、趨勢跟蹤策略、均值回歸超跌反彈等策略。\n3. 回測挑選適合策略的標的，針對不同特型的商品做微調以及增加濾網\n4. 透過 in-of-sample, out-of-sample 資料或是 rolling window 方式去最佳化參數，其中以不同目標作為最佳化對象，例如 Sharpe ratio、Profits/Max Drawdown 等\n5. 比較策略之間進出場點位分析策略相關性，最終使用有 7 個策略，總共使用於 130 多種不同商品、週期的 CFD 商品，並且架設 VPS 虛擬主機 24 小時運行策略\n6. 建構投資組合，每三個月調整策略權重",
+                title: "Capital Futures Leverage Trading Department - Trading Intern - MT5 Strategy Development and Portfolio Construction",
+                description: "• Developed a z-score mean-reversion model with AR(1) reversion strength; ATR-based dynamic bands and vol-scaled sizing that delivered +32% annual return vs. the prior model.\n• Built trend-following strategies with volatility filters across Forex CFDs/time frames, forming diversified long/short portfolios; reduced portfolio volatility by 39%, raised win rate by 26%, and deployed to live trading.",
                 category: "work",
                 images: [],
                 createdAt: "2025-07-13T02:22:45.654Z"
@@ -469,7 +469,7 @@ class TimelineApp {
         Object.keys(eventsByYear).sort((a, b) => b - a).forEach(year => {
             html += `<div class="year-group">
                         <div class="year-header">
-                            <h2 class="year-title">${year}年</h2>
+                            <h2 class="year-title">${year}</h2>
                         </div>`;
             
             eventsByYear[year].forEach(event => {
@@ -486,8 +486,8 @@ class TimelineApp {
 
     
     createEventElement(event) {
-        const monthNames = ['', '一月', '二月', '三月', '四月', '五月', '六月', 
-                           '七月', '八月', '九月', '十月', '十一月', '十二月'];
+        const monthNames = ['', 'January', 'February', 'March', 'April', 'May', 'June', 
+                           'July', 'August', 'September', 'October', 'November', 'December'];
         
         // 支持時間段顯示
         let dateDisplay = '';
@@ -495,16 +495,16 @@ class TimelineApp {
             // 時間段格式
             if (event.startYear === event.endYear) {
                 if (event.startMonth === event.endMonth) {
-                    dateDisplay = `${event.startYear}年${monthNames[event.startMonth]}`;
+                    dateDisplay = `${monthNames[event.startMonth]} ${event.startYear}`;
                 } else {
-                    dateDisplay = `${event.startYear}年${monthNames[event.startMonth]} - ${monthNames[event.endMonth]}`;
+                    dateDisplay = `${monthNames[event.startMonth]} - ${monthNames[event.endMonth]} ${event.startYear}`;
                 }
             } else {
-                dateDisplay = `${event.startYear}年${monthNames[event.startMonth]} - ${event.endYear}年${monthNames[event.endMonth]}`;
+                dateDisplay = `${monthNames[event.startMonth]} ${event.startYear} - ${monthNames[event.endMonth]} ${event.endYear}`;
             }
         } else {
             // 向後兼容舊格式
-            dateDisplay = `${event.year}年${monthNames[event.month]}`;
+            dateDisplay = `${monthNames[event.month]} ${event.year}`;
         }
         
         return `
@@ -514,7 +514,6 @@ class TimelineApp {
                         <div>
                             <h3>${this.escapeHtml(event.title)}</h3>
                             <div class="timeline-date">${dateDisplay}</div>
-                            <div class="timeline-category">${this.getCategoryName(event.category)}</div>
                         </div>
                     </div>
                     <p class="timeline-description">${this.escapeHtml(event.description).replace(/\n/g, '<br>')}</p>
@@ -546,8 +545,8 @@ class TimelineApp {
         const years = [...new Set(this.events.map(event => event.year))].sort((a, b) => b - a);
         const currentValue = this.yearFilter.value;
         
-        this.yearFilter.innerHTML = '<option value="all">所有年份</option>' +
-            years.map(year => `<option value="${year}">${year}年</option>`).join('');
+        this.yearFilter.innerHTML = '<option value="all">All Years</option>' +
+            years.map(year => `<option value="${year}">${year}</option>`).join('');
         
         if (years.includes(parseInt(currentValue))) {
             this.yearFilter.value = currentValue;
