@@ -245,7 +245,8 @@ header h1 i {
     border-left: 4px solid;
     transition: all 0.3s ease;
     position: relative;
-    width: calc(100% - 120px);
+    width: calc(100% - 180px);
+    margin-right: 60px;
 }
 
 .timeline-content:hover {
