@@ -144,7 +144,7 @@ class TimelineApp {
                 year: 2022, // 用於排序
                 month: 11,
                 title: "Clear Island Co., Ltd. - Investment Analyst/Execution Trader",
-                description: "• Built a business cycle timing model yielding an 81%-win rate in low-EPS tech during pre-expansions, with 33% annualized returns and 24% max drawdown over five years.\n• Developed a dynamic VaR system by integrating historical drawdowns with rolling 20-day volatility to enhance real-time risk assessment.\n• Managed a US$350,000 AUM portfolio in the U.S. market from December 2022 to July 2024",
+                description: "• Built a business cycle timing model yielding an 81%-win rate in low-EPS tech during pre-expansions, with 33% annualized returns and 24% max drawdown over five years.\n\n• Developed a dynamic VaR system by integrating historical drawdowns with rolling 20-day volatility to enhance real-time risk assessment.\n\n• Managed a US$350,000 AUM portfolio in the U.S. market from December 2022 to July 2024",
                 category: "work",
                 images: [],
                 createdAt: "2025-01-18T10:00:00.000Z"
@@ -154,7 +154,7 @@ class TimelineApp {
                 year: 2025,
                 month: 7,
                 title: "Vici Holdings - AI Data Scientist Intern",
-                description: "Conducted AI trading strategy research at Vici Holdings FIC Department's Strategy Research Lab.\n• Applied LLMs to extract and quantify indicators of management quality from U.S. 10-K filings and assessed their relationship with long-term stock performance using permutation tests.\n• Developed a multi-agent LLM system that surfaces impactful news, maps scenario paths, and generates trading suggestions based on M&A valuation and short interest/margin activity.\n• Analyzed trading opportunities in preferred stocks, specifically focusing on conversion terms and interest rate resets in merger and acquisition scenarios between companies.",
+                description: "• Conducted AI trading strategy research at Vici Holdings FIC Department's Strategy Research Lab.\n\n• Applied LLMs to extract and quantify indicators of management quality from U.S. 10-K filings and assessed their relationship with long-term stock performance using permutation tests.\n\n• Developed a multi-agent LLM system that surfaces impactful news, maps scenario paths, and generates trading suggestions based on M&A valuation and short interest/margin activity.\n\n• Analyzed trading opportunities in preferred stocks, specifically focusing on conversion terms and interest rate resets in merger and acquisition scenarios between companies.",
                 category: "work",
                 images: [],
                 createdAt: "2025-07-13T05:30:58.032Z"
@@ -174,7 +174,7 @@ class TimelineApp {
                 year: 2025,
                 month: 5,
                 title: "Automated Investment Style Classification for Mutual Fund Prospectuses Using NLP",
-                description: "1. Data preprocessing and tokenization 2. Generated domain-specific word embeddings using Skip-gram Word2Vec 3. Built Knowledge Base to calculate cosine distance between document vectors and style centroids as additional features 4. Performed classification based on features and vectors using Regression, Random Forest, and XGBoost 5. Evaluated on test data, achieving an automated fund style classification system with 66% accuracy using XGBoost",
+                description: "1. Data preprocessing and tokenization\n\n2. Generated domain-specific word embeddings using Skip-gram Word2Vec\n\n3. Built Knowledge Base to calculate cosine distance between document vectors and style centroids as additional features\n\n4. Performed classification based on features and vectors using Regression, Random Forest, and XGBoost\n\n5. Evaluated on test data, achieving an automated fund style classification system with 66% accuracy using XGBoost",
                 category: "work",
                 images: [],
                 createdAt: "2025-07-13T05:30:58.034Z"
@@ -184,7 +184,7 @@ class TimelineApp {
                 year: 2025,
                 month: 4,
                 title: "Kaggle Competition: Company Bankruptcy Prediction",
-                description: "1. Data preprocessing: Applied StandardScaler for feature normalization; addressed extreme class imbalance between 'bankrupt' and 'non-bankrupt' using SMOTE oversampling within each cross-validation fold 2. Built Pipeline connecting StandardScaler → SMOTE → Classifier, ensuring resampling occurred only during training phase to prevent data leakage 3. Tested multiple classification algorithms: Random Forest, Support Vector Machine (SVM), XGBoost, optimizing for F1 score as primary metric 4. Cross-validation tuning: Calculated optimal parameters within each CV fold; both Random Forest and XGBoost achieved ~0.50 F1 score on validation set 5. XGBoost model achieved 0.46 F1 score on test set, demonstrating PR97 model stability",
+                description: "1. Data preprocessing: Applied StandardScaler for feature normalization; addressed extreme class imbalance between 'bankrupt' and 'non-bankrupt' using SMOTE oversampling within each cross-validation fold\n\n2. Built Pipeline connecting StandardScaler → SMOTE → Classifier, ensuring resampling occurred only during training phase to prevent data leakage\n\n3. Tested multiple classification algorithms: Random Forest, Support Vector Machine (SVM), XGBoost, optimizing for F1 score as primary metric\n\n4. Cross-validation tuning: Calculated optimal parameters within each CV fold; both Random Forest and XGBoost achieved ~0.50 F1 score on validation set\n\n5. XGBoost model achieved 0.46 F1 score on test set, demonstrating PR97 model stability",
                 category: "work",
                 images: [],
                 createdAt: "2025-07-13T05:30:58.035Z"
@@ -214,7 +214,7 @@ class TimelineApp {
                 year: 2025,
                 month: 3,
                 title: "U.S. Treasury Spot Yield Curve Fitting (2015-2025)",
-                description: "1. Used Bloomberg 2015-2025 Treasury par yield rates, deriving Spot Yield Curve through Bootstrap method\n2. Applied Ho-Lee, Hull-White, Vasicek, Nelson-Siegel models, as well as LSTM, Random Forest, and Gradient Boosting Regression for model fitting and pricing\n3. Nelson-Siegel Model showed optimal stability with potential for price prediction and trading; LSTM model demonstrated very high accuracy, requiring further cross-validation to verify absence of overfitting",
+                description: "1. Used Bloomberg 2015-2025 Treasury par yield rates, deriving Spot Yield Curve through Bootstrap method\n\n2. Applied Ho-Lee, Hull-White, Vasicek, Nelson-Siegel models, as well as LSTM, Random Forest, and Gradient Boosting Regression for model fitting and pricing\n\n3. Nelson-Siegel Model showed optimal stability with potential for price prediction and trading; LSTM model demonstrated very high accuracy, requiring further cross-validation to verify absence of overfitting",
                 category: "work",
                 images: [],
                 createdAt: "2025-07-13T04:48:36.528Z"
@@ -224,7 +224,7 @@ class TimelineApp {
                 year: 2025,
                 month: 2,
                 title: "Rotman International Trading Competition",
-                description: "Led team to 1st place in the MSMFT internal competition: advanced to global finals by coordinating strategies and ensuring alignment across team members under real-time trading pressure.\n• Focused on relative value and tender-offer-driven opportunities, systematically capturing arbitrage from structural and team-driven market mechanisms instead of relying on directional bets.\n• Achieved 2nd place globally in the Sales & Trader Case among 35 teams, showcasing strong teamwork, disciplined execution, and effective risk management.",
+                description: "• Led team to 1st place in the MSMFT internal competition: advanced to global finals by coordinating strategies and ensuring alignment across team members under real-time trading pressure.\n\n• Focused on relative value and tender-offer-driven opportunities, systematically capturing arbitrage from structural and team-driven market mechanisms instead of relying on directional bets.\n\n• Achieved 2nd place globally in the Sales & Trader Case among 35 teams, showcasing strong teamwork, disciplined execution, and effective risk management.",
                 category: "personal",
                 images: [],
                 createdAt: "2025-07-13T02:22:45.654Z"
@@ -282,7 +282,7 @@ class TimelineApp {
                 year: 2020, // 用於排序
                 month: 9,
                 title: "Capital Futures Leverage Trading Department - Trading Intern - MT5 Strategy Development and Portfolio Construction",
-                description: "• Developed a z-score mean-reversion model with AR(1) reversion strength; ATR-based dynamic bands and vol-scaled sizing that delivered +32% annual return vs. the prior model.\n• Built trend-following strategies with volatility filters across Forex CFDs/time frames, forming diversified long/short portfolios; reduced portfolio volatility by 39%, raised win rate by 26%, and deployed to live trading.",
+                description: "• Developed a z-score mean-reversion model with AR(1) reversion strength; ATR-based dynamic bands and vol-scaled sizing that delivered +32% annual return vs. the prior model.\n\n• Built trend-following strategies with volatility filters across Forex CFDs/time frames, forming diversified long/short portfolios; reduced portfolio volatility by 39%, raised win rate by 26%, and deployed to live trading.",
                 category: "work",
                 images: [],
                 createdAt: "2025-07-13T02:22:45.654Z"

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clear Cache and Test</title>
+</head>
+<body>
+    <h1>Clear Cache Test</h1>
+    <button onclick="clearAndTest()">Clear Cache and Open Timeline</button>
+    <p id="status"></p>
+    
+    <script>
+        function clearAndTest() {
+            // Clear localStorage
+            localStorage.clear();
+            sessionStorage.clear();
+            
+            // Clear cookies
+            document.cookie.split(";").forEach(function(c) { 
+                document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); 
+            });
+            
+            document.getElementById('status').textContent = 'Cache cleared! Opening timeline...';
+            
+            // Open timeline in new window with cache-busting parameter
+            const timestamp = new Date().getTime();
+            window.open(`index.html?v=${timestamp}`, '_blank');
+        }
+    </script>
+</body>
+</html>
