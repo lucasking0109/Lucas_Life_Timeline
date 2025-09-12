@@ -337,6 +337,7 @@ class TimelineApp {
             document.getElementById('eventTitle').value = event.title;
             document.getElementById('eventDescription').value = event.description;
             document.getElementById('eventCategory').value = event.category;
+            document.getElementById('eventLink').value = event.link || '';
             
             // 檢查是否為時間段事件
             const isTimeRange = event.startYear && event.endYear;
@@ -373,12 +374,14 @@ class TimelineApp {
         const title = document.getElementById('eventTitle').value;
         const description = document.getElementById('eventDescription').value;
         const category = document.getElementById('eventCategory').value;
+        const eventLink = document.getElementById('eventLink').value;
         const isTimeRange = this.isTimeRangeCheckbox.checked;
         
         let eventData = {
             title,
             description,
-            category
+            category,
+            link: eventLink
         };
         
         if (isTimeRange) {
@@ -517,6 +520,13 @@ class TimelineApp {
                         </div>
                     </div>
                     <p class="timeline-description">${this.escapeHtml(event.description).replace(/\n/g, '<br>')}</p>
+                    ${event.link ? `
+                        <div class="event-link-container">
+                            <a href="${this.escapeHtml(event.link)}" target="_blank" rel="noopener noreferrer" class="event-link">
+                                <i class="fab fa-github"></i> 查看專案
+                            </a>
+                        </div>
+                    ` : ''}
                 </div>
             </div>
         `;
