@@ -1358,3 +1358,97 @@ header h1 i {
         opacity: 0;
     }
 }
+
+/* 個人介紹區域樣式 */
+.about-section {
+    margin: 3rem 0;
+    padding: 0;
+}
+
+.about-content {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 2.5rem;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.about-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.about-header h2 {
+    color: white;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin: 0;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.about-header i {
+    margin-right: 1rem;
+    color: #4facfe;
+    animation: pulse 2s infinite;
+}
+
+.about-text {
+    margin-top: 2rem;
+    text-align: left;
+}
+
+.about-text p {
+    color: #ffffff;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.about-text p:last-child {
+    margin-bottom: 0;
+}
+
+/* About 區域響應式設計 */
+@media (max-width: 768px) {
+    .about-content {
+        padding: 1.5rem;
+    }
+    
+    .about-header h2 {
+        font-size: 1.8rem;
+    }
+    
+    .about-text p {
+        font-size: 1rem;
+        line-height: 1.7;
+        margin-bottom: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-section {
+        margin: 2rem 0;
+    }
+    
+    .about-content {
+        padding: 1rem;
+    }
+    
+    .about-header {
+        margin-bottom: 1.5rem;
+    }
+    
+    .about-header h2 {
+        font-size: 1.5rem;
+    }
+    
+    .about-text p {
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin-bottom: 1rem;
+    }
+}
