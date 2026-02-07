@@ -18,7 +18,13 @@
       "Bash(git push:*)",
       "Bash(open http://localhost:8888/index.html)",
       "Bash(git commit:*)",
-      "Bash(npm run deploy:*)"
+      "Bash(npm run deploy:*)",
+      "WebFetch(domain:github.com)",
+      "Bash(lsof:*)",
+      "Bash(open http://localhost:8888)",
+      "Bash(kill:*)",
+      "Bash(pdfinfo:*)",
+      "Bash(pdftoppm:*)"
     ],
     "deny": [],
     "ask": []
