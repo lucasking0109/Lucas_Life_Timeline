@@ -146,7 +146,8 @@ const SITE_DATA = {
             description: [
                 "Developed volatility-arbitrage strategies by modeling implied volatility surfaces, cross-sectional deviations, and generating dynamic Black-Scholes pricing signals to systematically exploit recurring short-term mispricing.",
                 "Exploited hidden microstructure inefficiencies across markets by optimizing limit-order placement, execution timing, and fill probabilities, capturing ~60% of theoretical arbitrage potential with minimal risk exposure."
-            ]
+            ],
+            image: "images/imc-leaderboard.png"
         },
         {
             title: "Rotman International Trading Competition 2025",
@@ -154,7 +155,8 @@ const SITE_DATA = {
             description: [
                 "Led team to 1st place in the MSMFT internal competition: Achieved 2nd place globally in the Sales & Trader Case by coordinating strategies and ensuring alignment across team members under real-time trading pressure.",
                 "Deployed market-making strategies targeting order-book imbalances and spread dynamics, systematically profiting from structural inefficiencies while avoiding directional exposure."
-            ]
+            ],
+            image: "images/rotman-ranking.png"
         }
     ],
 

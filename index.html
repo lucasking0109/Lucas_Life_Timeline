@@ -213,6 +213,9 @@
                 }
                 html += '<span class="card-date">' + esc(item.date) + '</span>';
                 html += buildList(item.description);
+                if (item.image) {
+                    html += '<img class="competition-image" src="' + esc(item.image) + '" alt="' + esc(item.title) + '" loading="lazy">';
+                }
                 html += '</article>';
             }
             document.getElementById('competitions-content').innerHTML = html;
