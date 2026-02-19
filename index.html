@@ -107,6 +107,12 @@
                    '<i class="fa-brands fa-github"></i> View on GitHub</a>';
         }
 
+        function reportLink(url) {
+            if (!url) return '';
+            return '<a class="card-link report-link" href="' + esc(url) + '" target="_blank" rel="noopener noreferrer">' +
+                   '<i class="fa-solid fa-file-lines"></i> View Report</a>';
+        }
+
         // --- Render Navbar Brand ---
         document.getElementById('nav-brand').textContent = data.personal.name;
 
@@ -178,7 +184,7 @@
             var html = '';
             for (var i = 0; i < items.length; i++) {
                 var item = items[i];
-                var hasBody = (item.description && item.description.length > 0) || item.link;
+                var hasBody = (item.description && item.description.length > 0) || item.link || item.report;
                 html += '<div class="accordion-item">';
                 html += '<div class="accordion-header" role="button" tabindex="0" aria-expanded="false">';
                 html += '<div class="accordion-header-left">';
@@ -192,7 +198,10 @@
                 if (hasBody) {
                     html += '<div class="accordion-body"><div class="accordion-content">';
                     html += buildList(item.description);
+                    html += '<div class="card-links-row">';
                     html += githubLink(item.link);
+                    html += reportLink(item.report);
+                    html += '</div>';
                     html += '</div></div>';
                 }
                 html += '</div>';

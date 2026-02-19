@@ -361,6 +361,21 @@ a:hover {
     color: var(--accent-secondary);
 }
 
+.card-links-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.report-link {
+    background-color: rgba(139, 92, 246, 0.1);
+    color: var(--accent-secondary);
+}
+
+.report-link:hover {
+    background-color: rgba(139, 92, 246, 0.2);
+}
+
 .competition-image {
     width: 100%;
     max-width: 800px;

@@ -94,6 +94,68 @@ const SITE_DATA = {
 
     projects: [
         {
+            title: "Time Series Data Processing & Workflow",
+            date: "Feb 2026",
+            description: [
+                "Built time series data processing pipelines with workflow visualization.",
+                "Developed interactive HTML-based interfaces for time series analysis and documentation."
+            ],
+            link: "https://github.com/lucasking0109/TimeSeriesDataProcess",
+            report: "https://lucasking0109.github.io/TimeSeriesDataProcess/"
+        },
+        {
+            title: "Denoising Diffusion Probabilistic Models (DDPM) - Face Generation",
+            date: "Feb 2026",
+            description: [
+                "Implemented DDPM to generate synthetic 64×64 human face images using U-Net with attention mechanisms (~22M parameters) and 1000 denoising timesteps.",
+                "Trained on CelebA dataset (162,770 face images) with EMA model refinement (decay rate 0.9999).",
+                "Achieved best training loss of 0.01564 by epoch 33; generated diverse faces with varied hairstyles, skin tones after 60 epochs (~60 hours) on Apple MPS."
+            ],
+            link: "https://github.com/lucasking0109/DDPM_w-CelebA_Data",
+            report: "https://lucasking0109.github.io/DDPM_w-CelebA_Data/report/DDPM_Research_Report.html"
+        },
+        {
+            title: "DCGAN with CIFAR-10 - Image Generation & Mode Collapse Study",
+            date: "Jan 2026",
+            description: [
+                "Implemented Deep Convolutional GAN to generate 64×64 truck images from CIFAR-10, focusing on diagnosing and resolving mode collapse.",
+                "Applied label smoothing (real: 0.9, fake: 0.1), 30% dropout regularization, and dynamic training balance (skip discriminator updates when accuracy >80%).",
+                "V2 model (label smoothing + dropout + single-class training) achieved 29% improvement over baseline, demonstrating stable and diverse image generation."
+            ],
+            link: "https://github.com/lucasking0109/GAN_Model_w-_CIFAR_Data",
+            report: "https://lucasking0109.github.io/GAN_Model_w-_CIFAR_Data/DCGAN_Research_Report.html"
+        },
+        {
+            title: "CDX Correlation Surface - Gaussian & G-VG Copula Models",
+            date: "Nov 2025",
+            description: [
+                "Analyzed CDX credit index tranche pricing using Gaussian Copula and Generalized Variance Gamma (G-VG) Copula models across 6 distinct tenors (1-10 years).",
+                "Modeled implied correlation term structure using Bloomberg market data and OIS discount curves.",
+                "Found correlation increases from ~56% (1-year) to ~65% (10-year); achieved 22-43 bps pricing accuracy for near-term tranches."
+            ],
+            link: "https://github.com/lucasking0109/CDX_Correlation_Surface--Gaussian-G-VG-Copula-Models"
+        },
+        {
+            title: "Bloomberg Options Data Fetcher",
+            date: "Oct 2025",
+            description: [
+                "Built a professional-grade tool to retrieve comprehensive options data for QQQ and its top 20 constituent stocks from Bloomberg Terminal.",
+                "Developed interactive Streamlit dashboard with real-time statistics, data preview, and Plotly visualizations.",
+                "Fetches 26 Bloomberg fields including delta, gamma, theta, vega, and implied volatility with built-in quality validation and API quota monitoring."
+            ],
+            link: "https://github.com/lucasking0109/Bloomberg-data-fetcher"
+        },
+        {
+            title: "QQQ Put/Call Ratio Analysis (25-Year Study)",
+            date: "Sep 2025",
+            description: [
+                "Analyzed 6,345 daily observations of QQQ ETF and options market sentiment data from January 2000 to May 2025.",
+                "Identified statistically significant seasonal effects (p = 0.0019); classified market into 5 distinct regimes using extreme value theory and ML.",
+                "Combined seasonal/PCR strategy delivered 31.2% annualized returns vs. 27.2% buy-and-hold; April and November identified as optimal performance months."
+            ],
+            link: "https://github.com/lucasking0109/QQQ_daily_data_w-_pcr"
+        },
+        {
             title: "Automated Investment Style Classification for Mutual Fund Prospectuses Using NLP",
             date: "May 2025",
             description: [
@@ -114,17 +176,18 @@ const SITE_DATA = {
                 "Tested Random Forest, SVM, and XGBoost, optimizing for F1 score.",
                 "XGBoost model achieved 0.46 F1 score on test set, demonstrating PR97 model stability."
             ],
-            link: null
+            link: "https://github.com/lucasking0109/Bankrupcy_Prediction"
         },
         {
-            title: "Big Data Cleaning and Application",
+            title: "High-Frequency Data Analysis & Prediction",
             date: "Apr 2025",
             description: [
                 "Processed 400+ stocks' 1-minute price data from Polygon.io (May 2023 - May 2025) using PySpark, converting to Parquet format.",
                 "Identified stock price anomalies by calculating VWAP and comparing statistical values across different data sources.",
+                "Built LSTM neural network for price prediction achieving R² scores of 0.75 (AAPL) and 0.84 (TSLA); generated 15+ technical indicators for feature engineering.",
                 "Conducted regression analysis proving returns don't follow normal distribution; demonstrated most stock trading volume concentrates in the last 30 minutes before market close."
             ],
-            link: null
+            link: "https://github.com/lucasking0109/High-Frequency_Data_Analysis_Prediction"
         },
         {
             title: "U.S. Treasury Spot Yield Curve Fitting (2015-2025)",
