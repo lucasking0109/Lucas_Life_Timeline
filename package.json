@@ -1,31 +1,12 @@
 {
-  "name": "lucas-life-timeline",
-  "version": "1.0.0",
-  "description": "Lucas King's Personal Life Timeline - A dynamic web application to showcase life events and milestones",
-  "main": "script.js",
+  "name": "lucas-portfolio",
+  "version": "2.0.0",
+  "description": "Chun-An (Lucas) King's Portfolio Website - Static site hosted on GitHub Pages",
+  "private": true,
   "scripts": {
-    "dev": "netlify dev",
-    "build": "echo 'No build process needed for static files'",
-    "deploy": "netlify deploy",
-    "deploy:prod": "netlify deploy --prod"
+    "dev": "npx serve . -p 8888",
+    "build": "echo 'No build process needed for static files'"
   },
-  "keywords": [
-    "timeline",
-    "personal",
-    "life-events",
-    "netlify",
-    "javascript"
-  ],
   "author": "Lucas King",
-  "license": "MIT",
-  "dependencies": {
-    "cloudinary": "^1.41.0"
-  },
-  "devDependencies": {
-    "netlify-cli": "^17.0.0",
-    "playwright": "^1.55.0"
-  },
-  "engines": {
-    "node": ">=18.0.0"
-  }
+  "license": "MIT"
 }

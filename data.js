@@ -94,6 +94,28 @@ const SITE_DATA = {
 
     projects: [
         {
+            title: "WarZone Tower Defense - Reinforcement Learning Agent",
+            date: "Mar 2026",
+            description: [
+                "Reverse-engineered a Flash tower defense game by decompiling ActionScript source code and rebuilt a full Python + Pygame simulator from scratch for RL training.",
+                "Trained a MaskablePPO agent with 3,438-dim observations and 7,767 discrete actions across 20 experimental runs (267 hours, 209M steps, 10 parallel workers).",
+                "Discovered that behavioral cloning from just 3 human demonstrations outperformed 200+ hours of pure RL — agent achieved 165.6 waves vs. developer's record of 200."
+            ],
+            link: "https://github.com/lucasking0109/Warzone_Tower_Defense_RLmodel",
+            report: null
+        },
+        {
+            title: "BlinkAlarm - Eye Health Monitor (iOS & macOS)",
+            date: "Mar 2026",
+            description: [
+                "Built a privacy-first eye health app using Apple's on-device Vision framework to monitor blink rate in real time and alert users during prolonged screen use.",
+                "Implemented adaptive EAR-based blink detection with auto-calibration (45 samples), head pose filtering, and two-level smart alerts with haptic feedback.",
+                "Developed dual-platform support: macOS menu bar app with floating alerts and screen tint, iOS with themed monitoring interfaces and Pomodoro timer."
+            ],
+            link: "https://github.com/lucasking0109/blinkalarm-support",
+            report: null
+        },
+        {
             title: "Time Series Data Processing & Workflow",
             date: "Feb 2026",
             description: [

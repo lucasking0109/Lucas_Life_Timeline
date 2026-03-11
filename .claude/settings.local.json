@@ -24,7 +24,11 @@
       "Bash(open http://localhost:8888)",
       "Bash(kill:*)",
       "Bash(pdfinfo:*)",
-      "Bash(pdftoppm:*)"
+      "Bash(pdftoppm:*)",
+      "Bash(gh repo list:*)",
+      "WebFetch(domain:api.github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(git -C /Users/lucasking/Projects/Lucas_Life_Timeline status)"
     ],
     "deny": [],
     "ask": []
